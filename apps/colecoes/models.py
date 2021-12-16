@@ -8,8 +8,8 @@ class Colecao(models.Model):
 
     item_usuario = models.ForeignKey(
         ItemUsuario, related_name='itens_usuario', blank=True, null=True, on_delete=PROTECT)
-    nome = models.CharField(max_length=55, blank=True, null=True)
-    descricao = models.CharField(max_length=55, blank=True, null=True)
+    nome = models.CharField(max_length=255, blank=True, null=True)
+    descricao = models.CharField(max_length=255, blank=True, null=True)
     foto = models.ImageField()
 
     class Meta:

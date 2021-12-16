@@ -4,11 +4,11 @@ from apps.usuarios.models import Usuario
 
 
 class Item(models.Model):
-    nome = models.CharField(max_length=55, blank=False, null=False)
-    descricao = models.CharField(max_length=100, blank=True, null=True)
-    marca = models.CharField(max_length=15, blank=True, null=True)
-    modelo = models.CharField(max_length=15, blank=True, null=True)
-    cor = models.CharField(max_length=15, blank=True, null=True)
+    nome = models.CharField(max_length=255, blank=False, null=False)
+    descricao = models.CharField(max_length=255, blank=True, null=True)
+    marca = models.CharField(max_length=255, blank=True, null=True)
+    modelo = models.CharField(max_length=255, blank=True, null=True)
+    cor = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'itens'
@@ -26,8 +26,10 @@ class ItemUsuario(models.Model):
         Usuario, related_name='usuarios', blank=True, null=True, on_delete=models.PROTECT)
     foto = models.ImageField()
     data_compra = models.DateField(blank=True, null=True)
-    valor_pago = models.DecimalField(blank=True, null=True)
-    valor_venda = models.DecimalField(blank=True, null=True)
+    valor_pago = models.DecimalField(
+        max_digits=7, decimal_places=2, blank=True, null=True)
+    valor_venda = models.DecimalField(
+        max_digits=7, decimal_places=2, blank=True, null=True)
     estado_item = models.CharField(max_length=100, blank=True, null=True)
     disponivel_venda = models.BooleanField()
 
