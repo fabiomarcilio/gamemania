@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path(
         route='',
-        view=views.home,
+        view=views.dashboard,
         name='index',
     )
 ]
