@@ -1,9 +1,39 @@
 from django import forms
 
-from apps.usuarios.models import Usuario
+from apps.usuarios.models import Usuario, UFS_SIGLAS
 
 
 class UsuarioModelForm(forms.ModelForm):
+
+    nome = forms.CharField(required=True, label='Nome',
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))
+    cpf = forms.CharField(label='CPF', widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    foto = forms.ImageField(required=False)
+    data_nascimento = forms.DateField(
+        label='Data de nascimento', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    telefone = forms.CharField(
+        label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.CharField(label='Email', widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    redes_sociais = forms.CharField(
+        label='Redes Sociais', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    cep = forms.CharField(label='CEP', widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    logradouro = forms.CharField(
+        label='Logradouro', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    bairro = forms.CharField(
+        label='Bairro', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    cidade = forms.CharField(
+        label='Cidade', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    uf = forms.ChoiceField(required=True, label='UF', choices=UFS_SIGLAS, widget=forms.Select(
+        attrs={'class': 'form-control'}), initial='SP')
+    numero = forms.CharField(
+        label='Numero', widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Usuario
-        fields = '__all__'
+        fields = [
+            'nome', 'cpf', 'foto', 'data_nascimento', 'telefone', 'email',
+            'redes_sociais', 'cep', 'logradouro', 'bairro', 'cidade', 'uf', 'numero'
+        ]

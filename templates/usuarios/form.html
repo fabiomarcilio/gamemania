@@ -3,47 +3,119 @@
 
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Inicio</li>
+<ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item">
+        <a href="{% url 'core:index' %}">
+            <i class="fas fa-home"></i>
+            Página Inicial
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        Usuários
+    </li>
+</ol>
 {% endblock breadcrumb %}
 
 {% block body %}
 <div class="col-md-12">
-    <div class="card card-primary">
+    <div class="card card-primary shadow">
         <div class="card-header">
             <h3 class="card-title">Cadastro de Usuário</h3>
         </div>
-        <form>
+        <form method="POST">
+            {% csrf_token %}
             <div class="card-body">
-            {% comment %} <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.nome.label_tag }}
+                            {{ form.nome }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {{ form.cpf.label_tag }}
+                            {{ form.cpf }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {{ form.telefone.label_tag }}
+                            {{ form.telefone }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {{ form.data_nascimento.label_tag }}
+                            {{ form.data_nascimento }}
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group-append">
-                    <span class="input-group-text">Upload</span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.redes_sociais.label_tag }}
+                            {{ form.redes_sociais }}
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {{ form.cep.label_tag }}
+                            {{ form.cep }}
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            {{ form.logradouro.label_tag }}
+                            {{ form.logradouro }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {{ form.bairro.label_tag }}
+                            {{ form.bairro }}
+                        </div>
+                    </div>
                 </div>
-            </div> {% endcomment %}
-            {% comment %} <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> {% endcomment %}
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            {{ form.cidade.label_tag }}
+                            {{ form.cidade }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {{ form.uf.label_tag }}
+                            {{ form.uf }}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            {{ form.numero.label_tag }}
+                            {{ form.numero }}
+                        </div>
+                    </div>
+                </div>
+                {% comment %} <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.foto }}
+                    </div>
+                </div>{% endcomment %}
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
             </div>
         </form>
     </div>
+    {% include 'usuarios/list.html' %}
 </div>
 {% endblock body %}

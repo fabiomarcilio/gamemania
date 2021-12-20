@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 
 <html lang="pt-br">
     <head>
@@ -12,11 +12,17 @@
         <!-- AdminLTE3 style -->
         <link href="{% static 'dist/css/adminlte.css' %}" rel="stylesheet">
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        
+        <!-- REQUIRED SCRIPTS -->
+        <!-- jQuery -->
+        <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <!-- AdminLTE App -->
+        <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 
         {% block head_extra %}
         {% endblock head_extra %}
@@ -31,13 +37,9 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index3.html" class="brand-link">
-                {% comment %} <img src="img/gamemania.jpeg" alt="GameMania" class="brand-image img-circle elevation-3"
-                    style="opacity: .8"> {% endcomment %}
+                <a href="{% url 'core:index' %}" class="brand-link">
                     <img  class='logo' src="{% static 'img/gamemania.jpeg' %}" alt="Imagem"/>
-                {% comment %} <span class="brand-text font-weight-light">GameMania</span> {% endcomment %}
                 </a>
-
                 <!-- Sidebar -->
                 {% include 'core/sidebar.html' %}
                 <!-- /.sidebar -->
@@ -47,12 +49,9 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                         <div class="col-sm-6">
-                            {% comment %} <h1 class="m-0 text-dark">Starter Page</h1> {% endcomment %}
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            {% comment %} <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Inicio</li> {% endcomment %}
                             {% block breadcrumb %}
                             {% endblock breadcrumb %}
                             </ol>
@@ -60,21 +59,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.content-header -->
-                <div class="container">
-                    <section>
-                        <img src="static/dist/img/gamemania.jpeg" alt="Imagem" 
-                        style="display: block; margin-left: auto; margin-right: auto">
-                    </section>
-                </div>
-                <!-- Main content -->
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
                         </div>
                     </div>
                 </div>
-
                 {% block body %}
                 {% endblock body %}
             </div>
@@ -92,15 +82,6 @@
             <!-- Main Footer -->
             {% include 'core/footer.html' %}
         </div>
-
-        <!-- REQUIRED SCRIPTS -->
-
-        <!-- jQuery -->
-        <script src="static/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="static/dist/js/adminlte.min.js"></script>
         
         {% block extra_javascript %}
         {% endblock extra_javascript %}
