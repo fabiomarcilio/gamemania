@@ -1,0 +1,37 @@
+{% load static %}
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+     id="modal_delete{{ modal_id }}"
+     role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="{{ modal_form_method|default:'POST' }}" action="{{ modal_form_action }}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    Deseja realmente apagar esse registro?
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12 align-content-center text-center">
+                        <button class="btn btn-sm btn-info mr-2" data-dismiss="modal" type="button">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                        </button>
+                        <input name="_method" type="hidden" value="delete">
+                        <button class="btn btn-sm btn-danger" data-placement="top" data-toggle="tooltip" title="Esta operação não poderá ser revertida!">
+                            <i class="fas fa-check"></i> 
+                            Sim, apagar!
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

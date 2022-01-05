@@ -1,0 +1,32 @@
+{% block content %}
+{% endblock content %}
+
+{% block htmx_extras %}
+    <!--Mensagens-->
+    {% comment %}
+        Cria uma mensagem com o plugin toastr, passando o conteúdo de
+        'message.tags' como o tipo do toast e de 'message' como o texto
+    {% endcomment %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level_tag == 'success' or message.level_tag == 'info' or message.level_tag == 'warning' or message.level_tag == 'error' %}
+                <script type=text/javascript>
+                    toastr.{{ message.level_tag }}('{{ message }}', '{{ message.extra_tags|default_if_none:"" }}')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <!--/Mensagens-->
+
+    <!--HTMX-->
+    <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+    <!--Hyperscript-->
+    <script src="https://unpkg.com/hyperscript.org@0.8.2"></script>
+    <!--CSRF for HTMX requests-->
+    <script>
+        {% comment %} Adiciona o CSRF token aos headers do HTMX {% endcomment %}
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+{% endblock htmx_extras %}

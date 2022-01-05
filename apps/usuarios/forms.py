@@ -8,18 +8,18 @@ class UsuarioModelForm(forms.ModelForm):
     nome = forms.CharField(required=True, label='Nome',
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
     cpf = forms.CharField(label='CPF', widget=forms.TextInput(
-        attrs={'class': 'form-control'}))
+        attrs={'class': 'form-control mask-cpf'}))
     foto = forms.ImageField(required=False)
-    data_nascimento = forms.DateField(
-        label='Data de nascimento', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput(format='%Y-%m-%d',
+                                                                                         attrs={'type': 'date', 'class': 'form-control mask-data'}))
     telefone = forms.CharField(
-        label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control'}))
+        label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control mask-telefone'}))
     email = forms.CharField(label='Email', widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     redes_sociais = forms.CharField(
         label='Redes Sociais', widget=forms.TextInput(attrs={'class': 'form-control'}))
     cep = forms.CharField(label='CEP', widget=forms.TextInput(
-        attrs={'class': 'form-control'}))
+        attrs={'class': 'form-control mask-cep'}))
     logradouro = forms.CharField(
         label='Logradouro', widget=forms.TextInput(attrs={'class': 'form-control'}))
     bairro = forms.CharField(

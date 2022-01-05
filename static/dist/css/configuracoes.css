@@ -1,0 +1,95 @@
+/* Tabela responsiva para Small Sizes */
+@media (max-width: 480px) {
+
+    /* mobile Table */
+    .table-mobile {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+
+    .table-mobile thead,
+    .table-mobile tbody,
+    .table-mobile th,
+    .table-mobile td,
+    .table-mobile tr {
+        display: block;
+    }
+
+    .table-mobile td,
+    .table-mobile th {
+        height: 35px;
+    }
+
+    .table-mobile thead {
+        float: left;
+    }
+
+    .table-mobile tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .table-mobile tbody tr {
+        display: inline-block;
+        min-width:210px
+    }
+
+}
+
+/* Tabela com barra de rolagem, primeira e última colunas fixas, para uso em telas maiores */
+@media (min-width: 480px) {
+
+    .last-fixed .table-scroll {
+        margin-right: 130px;
+        overflow-x: scroll;
+        overflow-y: visible;
+        padding-bottom: 5px;
+    }
+
+    .last-fixed th:last-child {
+        text-align: left;
+    }
+
+    .last-fixed th:last-child,
+    .last-fixed td:last-child {
+        width: 120px;
+        right: 0;
+        position: absolute;
+        top: auto;
+    }
+
+    .first-fixed .table-scroll {
+        margin-left: 80px;
+        overflow-x: scroll;
+        overflow-y: visible;
+        padding-bottom: 5px;
+    }
+
+    .first-fixed th:first-child {
+        text-align: left;
+    }
+
+    .first-fixed th:first-child,
+    .first-fixed td:first-child {
+        position: absolute;
+        width: 70px;
+        left: 5px;
+        top: auto;
+    }
+
+    .table .table-hover {
+        width: 100%;
+    }
+
+    td {
+        white-space: nowrap;
+    }
+}
+
+th {
+    white-space: nowrap;
+}

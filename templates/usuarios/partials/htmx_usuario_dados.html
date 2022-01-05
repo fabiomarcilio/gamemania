@@ -1,0 +1,119 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card card-primary shadow">
+    <div class="card-header">
+        <h3 class="card-title">Cadastro de Usuário</h3>
+    </div>
+    <form method="POST"
+        id="form_usuario_dados"
+        {% if pessoa_id %}
+            action="{% url 'usuario:update' %}"
+        {% else %}
+            action="{% url 'usuario:create' %}"
+        {% endif %}
+        hx-target="#container-usuario-dados"
+        hx-swap="innerHTML">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.nome.label_tag }}
+                        {{ form.nome }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.cpf.label_tag }}
+                        {{ form.cpf }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.telefone.label_tag }}
+                        {{ form.telefone }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.data_nascimento.label_tag }}
+                        {{ form.data_nascimento }}
+                        {% comment %} {% for error in form.data_nascimento %}
+                            <div class="invalid-feedback">
+                                {{ error }}
+                            </div>
+                        {% endfor %} {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.redes_sociais.label_tag }}
+                        {{ form.redes_sociais }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.cep.label_tag }}
+                        {{ form.cep }}
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        {{ form.logradouro.label_tag }}
+                        {{ form.logradouro }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.bairro.label_tag }}
+                        {{ form.bairro }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        {{ form.cidade.label_tag }}
+                        {{ form.cidade }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.uf.label_tag }}
+                        {{ form.uf }}
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        {{ form.numero.label_tag }}
+                        {{ form.numero }}
+                    </div>
+                </div>
+            </div>
+            {% comment %} <div class="col-md-2">
+                <div class="form-group">
+                    {{ form.foto }}
+                </div>
+            </div>{% endcomment %}
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    {% comment %} </form> {% endcomment %}
+</div>
+
+<script src="{% static 'dist/js/usuarios.js' %}"></script>
+<script src="{% static 'dist/js/cep.js' %}"></script>
+{% endblock content %}

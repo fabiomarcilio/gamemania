@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -76,23 +76,9 @@ WSGI_APPLICATION = 'gamemania.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'gamemania'),
-        'USER': os.environ.get('DB_USER', 'gamemania'),
-        'PASSWORD': os.environ.get('DB_PASS', 'Admin20Server18'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# configurações sobrescritas no local_settings.py
+DATABASE_PASS = ''
+DATABASES = {}
 
 
 # Password validation
@@ -144,3 +130,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# carrega as configurações locais a partir do arquivo .local_settings.py
+try:
+    from .local_settings import *
+except ValueError:
+    pass

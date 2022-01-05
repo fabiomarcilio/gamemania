@@ -1,18 +1,35 @@
 from django.urls import path
 
-from .views import UsuarioListView, UsuarioCreateView
+from .views import (UsuarioHtmxListView, UsuarioHtmxCreateView,
+                    UsuarioHtmxUpdateView, UsuarioHtmxDeleteView,
+                    UsuarioTemplateView)
 
 app_name = 'usuario'
 
 urlpatterns = [
     path(
-        route='',
-        view=UsuarioListView,
+        route='form',
+        view=UsuarioTemplateView.as_view(),
+        name='form'
+    ),
+    path(
+        route='list',
+        view=UsuarioHtmxListView.as_view(),
         name='list'
     ),
     path(
-        route='index',
-        view=UsuarioCreateView.as_view(),
-        name='index'
+        route='create',
+        view=UsuarioHtmxCreateView.as_view(),
+        name='create'
+    ),
+    path(
+        route='update',
+        view=UsuarioHtmxUpdateView.as_view(),
+        name='update'
+    ),
+    path(
+        route='delete/<int:pk>/',
+        view=UsuarioHtmxDeleteView.as_view(),
+        name='delete'
     )
 ]
