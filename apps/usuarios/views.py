@@ -1,14 +1,14 @@
-from django.contrib.messages.api import success
+from django.core import paginator
 from django.shortcuts import render
 from django.urls import reverse
-from django.contrib import messages
-from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.views.generic import CreateView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import DeleteView, UpdateView, FormView
+from django.views.generic.edit import DeleteView, FormView
 from django.views.generic.list import ListView
 from apps.usuarios.forms import UsuarioModelForm
+from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 
 from apps.usuarios.models import Usuario
@@ -37,9 +37,16 @@ class UsuarioHtmxCreateView(SuccessMessageMixin, CreateView):
     template_name = 'usuarios/partials/htmx_usuario_dados.html'
     form_class = UsuarioModelForm
     sucess_message = 'Usuário cadastrado'
+    success_url = 'form'
+
+    # def post(self, request, *args, **kwargs):
+    #     response = super().post(request, *args, **kwargs)
+    #     messages.success(self.request, self.success_message)
+    #     # response['Hx-trigger'] = 'hx-list-updated'
+    #     return response
 
     # def get_success_url(self):
-    #     return reverse('usuario:index')
+    #     return reverse('usuario:form')
 
     # def form_valid(self, form):
     #     usuario = UsuarioModelForm()
@@ -76,14 +83,18 @@ class UsuarioHtmxUpdateView(FormView):
     #     return self.request.META.get('HTTP_REFERER', '/')
 
 
-class UsuarioHtmxDeleteView(DeleteView):
+class UsuarioHtmxDeleteView(SuccessMessageMixin, DeleteView):
     model = Usuario
     success_message = 'Usuário excluído!'
+    context_object_name = 'usuarios'
+    template_name = 'usuarios/partials/htmx_usuario_list.html'
+    success_url = 'form'
 
     def delete(self, request, *args, **kwargs):
-        super(UsuarioHtmxDeleteView, self).delete(request, *args, **kwargs)
-        messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.get_success_url())
+        self.object = self.get_object()
+        self.object.delete()
+        messages.success(request, self.success_message)
+        response = render(request, self.template_name)
+        response['HX-trigger'] = 'hx-list-updated'
 
-    def get_success_url(self):
-        return reverse_lazy('usuario:form')
+        return response
