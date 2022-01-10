@@ -91,6 +91,22 @@
             </aside>
             <!-- /.control-sidebar -->
 
+            <!--Mensagens-->
+            {% comment %}
+                Cria uma mensagem com o plugin toastr, passando o conteúdo de
+                'message.tags' como o tipo do toast e de 'message' como o texto
+            {% endcomment %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level_tag == 'success' or message.level_tag == 'info' or message.level_tag == 'warning' or message.level_tag == 'error' %}
+                        <script type=text/javascript>
+                            toastr.{{ message.level_tag }}('{{ message }}', '{{ message.extra_tags|default_if_none:"" }}')
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <!--/Mensagens-->
+
             <!-- Main Footer -->
             {% include 'core/footer.html' %}
         </div>

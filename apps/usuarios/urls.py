@@ -23,7 +23,7 @@ urlpatterns = [
         name='create'
     ),
     path(
-        route='update',
+        route='update/<int:pk>/',
         view=UsuarioHtmxUpdateView.as_view(),
         name='update'
     ),

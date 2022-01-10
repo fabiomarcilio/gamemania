@@ -58,17 +58,23 @@
                                         <td>{{ usuario.uf }}</td>
                                         <td>{{ usuario.numero }}</td>
                                         <td>
-                                            <a href="{% url 'usuario:update' %}">Editar | </a>
+                                            <a hx-trigger="click"
+                                                href="#"
+                                                hx-get="{% url 'usuario:update' usuario.id %}"
+                                                hx-target="#container-usuario-dados"
+                                                hx-swap="innerHTML">
+                                                Editar | 
+                                            </a>
                                             <a hx-trigger="confirmado"
-                                            href="#"
-                                            hx-delete="{% url 'usuario:delete' usuario.id %}"
-                                            hx-target="#container-usuario-list"
-                                            hx-swap="innerHTML"
-                                            _="on click
-                                            call showDeleteConfirmationWindow(event)
-                                            if 
-                                            result.value trigger confirmado">
-                                            Excluir
+                                                href="#"
+                                                hx-delete="{% url 'usuario:delete' usuario.id %}"
+                                                hx-target="#container-usuario-list"
+                                                hx-swap="innerHTML"
+                                                _="on click
+                                                call showDeleteConfirmationWindow(event)
+                                                if 
+                                                result.value trigger confirmado">
+                                                Excluir
                                             </a>
                                         </td>
                                     </tr>

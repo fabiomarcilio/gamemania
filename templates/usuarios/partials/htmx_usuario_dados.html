@@ -1,15 +1,15 @@
-{% comment %} {% extends 'base/base_htmx.html' %} {% endcomment %}
+{% extends 'base/base_htmx.html' %}
 {% load static %}
 
-{% comment %} {% block content %} {% endcomment %}
+{% block content %}
 <div class="card card-primary shadow">
     <div class="card-header">
         <h3 class="card-title">Cadastro de Usuário</h3>
     </div>
     <form method="POST"
         id="form_usuario_dados"
-        {% if pessoa_id %}
-            action="{% url 'usuario:update' %}"
+        {% if usuario_id %}
+            action="{% url 'usuario:update' usuario_id %}"
         {% else %}
             action="{% url 'usuario:create' %}"
         {% endif %}
@@ -116,4 +116,4 @@
 
 <script src="{% static 'dist/js/usuarios.js' %}"></script>
 <script src="{% static 'dist/js/cep.js' %}"></script>
-{% comment %} {% endblock content %} {% endcomment %}
+{% endblock content %}

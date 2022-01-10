@@ -21,22 +21,17 @@
     <div class="container-fluid">
         <div id="container-usuario-dados"
             hx-get="{% url 'usuario:create' %}"
-            {% if pessoa %}
-                hx-vals='{"usuario_id": "{{ usuario.id }}"}'
-            {% endif %}
+            hx-vals='{"usuario_id": "{{ usuario.id }}"}'
             hx-trigger="load"
             hx-swap="innerHTML">
         </div>
         <div id="container-usuario-list"
             hx-get="{% url 'usuario:list' %}"
-            {% if pessoa %}
-                hx-vals='{"usuario_id": "{{ usuario.id }}"}'
-            {% endif %}
+            hx-vals='{"usuario_id": "{{ usuario.id }}"}'
             hx-trigger="load, hx-list-updated from:body"
             hx-swap="innerHTML">
         </div>
     </div>
-    {% comment %} {% include 'usuarios/list.html' %} {% endcomment %}
 </div>
 
 {% endblock body %}

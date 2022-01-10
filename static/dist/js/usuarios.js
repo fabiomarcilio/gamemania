@@ -6,7 +6,7 @@ var SPMaskBehavior = function (val) {
             field.mask(SPMaskBehavior.apply({}, arguments), options);
         }
     };
-$('.sp_celphones').mask(SPMaskBehavior, spOptions);
+// $('.sp_celphones').mask(SPMaskBehavior, spOptions);
 
 
 $(function () {
