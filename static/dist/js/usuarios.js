@@ -8,6 +8,11 @@ var SPMaskBehavior = function (val) {
     };
 // $('.sp_celphones').mask(SPMaskBehavior, spOptions);
 
+$(".capitalizar").blur(function () {
+    if (this.value) {
+        this.value = Capitalizar(this.value);
+    }
+});
 
 $(function () {
     //Adiciona máscaras na criação da tela.
@@ -15,6 +20,8 @@ $(function () {
     // $('.mask-data').mask('00/00/0000');
     $('.mask-telefone').mask(SPMaskBehavior, spOptions);
     $('.mask-cep').mask('00000-000');
+    $(".cnpj").mask("00.000.000/0000-00", { reverse: true });
+
 });
 
 $(document).on("submit", function () {
@@ -44,3 +51,24 @@ function showDeleteConfirmationWindow(event) {
         cancelButtonColor: "#17a2b8",
     });
 };
+
+function Capitalizar(nome) {
+    // remove espaços duplicados e divide o nome
+    let nomes = nome.toLowerCase().replace("  ", " ").split(" ");
+    // preposições para não capitalizar
+    let preps = ["e", "da", "das", "de", "di", "do", "dos", "du", "para", "com"];
+
+    // capitaliza a primeira letra de cada palavra
+    return nomes
+        .map((nome) => {
+            if (!nome) {
+                return;
+            }
+            // se encontrar o nome em uma das preposições, não capitaliza
+            if (preps.indexOf(nome) >= 0) {
+                return nome;
+            }
+            return nome[0].toUpperCase() + nome.substr(1);
+        })
+        .join(" ");
+}

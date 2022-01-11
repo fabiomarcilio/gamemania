@@ -1,5 +1,6 @@
 {% extends 'base/base_htmx.html' %}
 {% load static %}
+{% comment %} {% load custom_filters %} {% endcomment %}
 
 {% block content %}
 <div class="row">
@@ -46,12 +47,12 @@
                                     <tr>
                                         <td>{{ usuario.id }}</td>
                                         <td>{{ usuario.nome }}</td>
-                                        <td>{{ usuario.cpf }}</td>
-                                        <td>{{ usuario.telefone }}</td>
-                                        <td>{{ usuario.data_nascimento }}</td>
+                                        <td class="mask-cpf">{{ usuario.cpf }}</td>
+                                        <td class="mask-telefone">{{ usuario.telefone }}</td>
+                                        <td>{{ usuario.data_nascimento|date:"d/m/Y" }}</td>
                                         <td>{{ usuario.email }}</td>
                                         <td>{{ usuario.redes_sociais }}</td>
-                                        <td>{{ usuario.cep }}</td>
+                                        <td class="mask-cep">{{ usuario.cep }}</td>
                                         <td>{{ usuario.logradouro }}</td>
                                         <td>{{ usuario.bairro }}</td>
                                         <td>{{ usuario.cidade }}</td>

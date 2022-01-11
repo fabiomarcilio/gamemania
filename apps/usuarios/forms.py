@@ -6,7 +6,7 @@ from apps.usuarios.models import Usuario, UFS_SIGLAS
 class UsuarioModelForm(forms.ModelForm):
 
     nome = forms.CharField(required=True, label='Nome',
-                           widget=forms.TextInput(attrs={'class': 'form-control'}))
+                           widget=forms.TextInput(attrs={'class': 'form-control capitalizar'}))
     cpf = forms.CharField(label='CPF', widget=forms.TextInput(
         attrs={'class': 'form-control mask-cpf'}))
     foto = forms.ImageField(required=False)
