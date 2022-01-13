@@ -1,0 +1,63 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card card-primary shadow">
+    <div class="card-header">
+        <h3 class="card-title">Cadastro de Itens</h3>
+    </div>
+    <form method="POST"
+        id="form_item_dados"
+        {% if item_id %}
+            action="{% url 'item:update' item_id %}"
+        {% else %}
+            action="{% url 'item:create' %}"
+        {% endif %}
+        hx-target="#container-item-dados"
+        hx-swap="innerHTML">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.nome.label_tag }}
+                        {{ form.nome }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.marca.label_tag }}
+                        {{ form.marca }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.modelo.label_tag }}
+                        {{ form.modelo }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.cor.label_tag }}
+                        {{ form.cor }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form.descricao.label_tag }}
+                        {{ form.descricao }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    {% comment %} </form> {% endcomment %}
+</div>
+
+<script src="{% static 'dist/js/usuarios.js' %}"></script>
+<script src="{% static 'dist/js/cep.js' %}"></script>
+{% endblock content %}

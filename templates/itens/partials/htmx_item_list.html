@@ -1,13 +1,12 @@
 {% extends 'base/base_htmx.html' %}
 {% load static %}
-{% comment %} {% load custom_filters %} {% endcomment %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
-                <h3 class="card-title">Usuários Cadastrados</h3>
+                <h3 class="card-title">Itens Cadastrados</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -28,48 +27,34 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
-                                    <th>CPF</th>
-                                    <th>Telefone</th>
-                                    <th>Data de nascimento</th>
-                                    <th>E-mail</th>
-                                    <th>Redes Sociais</th>
-                                    <th>CEP</th>
-                                    <th>Logradouro</th>
-                                    <th>Bairro</th>
-                                    <th>Cidade</th>
-                                    <th>UF</th>
-                                    <th>Numero</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Cor</th>
+                                    <th>Descrição</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for usuario in usuarios %}
+                                {% for item in itens %}
                                     <tr>
-                                        <td>{{ usuario.id }}</td>
-                                        <td>{{ usuario.nome }}</td>
-                                        <td class="mask-cpf">{{ usuario.cpf }}</td>
-                                        <td class="mask-telefone">{{ usuario.telefone }}</td>
-                                        <td>{{ usuario.data_nascimento|date:"d/m/Y" }}</td>
-                                        <td>{{ usuario.email }}</td>
-                                        <td>{{ usuario.redes_sociais }}</td>
-                                        <td class="mask-cep">{{ usuario.cep }}</td>
-                                        <td>{{ usuario.logradouro }}</td>
-                                        <td>{{ usuario.bairro }}</td>
-                                        <td>{{ usuario.cidade }}</td>
-                                        <td>{{ usuario.uf }}</td>
-                                        <td>{{ usuario.numero }}</td>
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.nome }}</td>
+                                        <td>{{ item.marca }}</td>
+                                        <td>{{ item.modelo }}</td>
+                                        <td>{{ item.cor }}</td>
+                                        <td>{{ item.descricao }}</td>
                                         <td>
                                             <a hx-trigger="click"
                                                 href="#"
-                                                hx-get="{% url 'usuario:update' usuario.id %}"
-                                                hx-target="#container-usuario-dados"
+                                                hx-get="{% url 'item:update' item.id %}"
+                                                hx-target="#container-item-dados"
                                                 hx-swap="innerHTML">
                                                 Editar | 
                                             </a>
                                             <a hx-trigger="confirmado"
                                                 href="#"
-                                                hx-delete="{% url 'usuario:delete' usuario.id %}"
-                                                hx-target="#container-usuario-list"
+                                                hx-delete="{% url 'item:delete' item.id %}"
+                                                hx-target="#container-item-list"
                                                 hx-swap="innerHTML"
                                                 _="on click
                                                 call showDeleteConfirmationWindow(event)
@@ -86,7 +71,7 @@
                 </div>
             </div>
         </div>
-        {% include 'usuarios/pagination.html' %}
+        {% include 'itens/pagination.html' %}
     </div>
 </div>
 {% endblock content %}
