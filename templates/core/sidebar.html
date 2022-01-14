@@ -46,14 +46,14 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="nav nav-treeview">
+                {% comment %} <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <i class="far fa-list-alt nav-icon"></i>
                             <p>Lista de itens</p>
                         </a>
                     </li>
-                </ul>
+                </ul> {% endcomment %}
             </li>
             <li class="nav-item has-treeview">
                 <a class="nav-link active" href="#">
@@ -65,7 +65,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="{% url 'colecao:form' %}">
                             <i class="fas fa-gamepad nav-icon"></i>
                             <p>Cadastro</p>
                         </a>

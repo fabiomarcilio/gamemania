@@ -1,0 +1,78 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link href="{% static 'dist/css/foto.css' %}" rel="stylesheet">
+{% endblock head_extra %}
+
+{% block content %}
+<div class="card card-primary shadow">
+    <div class="card-header">
+        <h3 class="card-title">Cadastro de Coleções</h3>
+    </div>
+    <form method="POST"
+        id="form_colecao_dados"
+        {% if colecao_id %}
+            action="{% url 'colecao:update' colecao_id %}"
+        {% else %}
+            action="{% url 'colecao:create' %}"
+        {% endif %}
+        hx-target="#container-colecao-dados"
+        hx-swap="innerHTML">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.nome.label_tag }}
+                        {{ form.nome }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    {% comment %} <div class="form-group"> {% endcomment %}
+                        {{ form.foto.label_tag }}
+                        {{ form.foto }}
+                        <div class="widget-user-image">
+                            <img id="img-foto-cliente"
+                                alt="Cliente"
+                                class="img-circle img-fluid elevation-2 foto-cliente 
+                                    btn btn-light form-control foto-header"
+                                style="width: 90px; height: 90px; padding: 0px;"
+                                {% if form.foto %} 
+                                    src="{{ form.foto.url }}"
+                                {% else %}
+                                    src="{% static 'dist/img/sem-foto.gif' %}" 
+                                {% endif %}
+                            >
+                        </div>
+                    {% comment %} </div> {% endcomment %}
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.data_inicio.label_tag }}
+                        {{ form.data_inicio }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.valor_estimado.label_tag }}
+                        {{ form.valor_estimado }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form.descricao.label_tag }}
+                        {{ form.descricao }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+</div>
+<script src="{% static 'dist/js/colecao.js' %}"></script>
+<script src="{% static 'dist/js/foto.js' %}"></script>
+{% endblock content %}

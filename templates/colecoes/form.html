@@ -1,0 +1,43 @@
+{% extends 'core/index.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item">
+        <a href="{% url 'core:index' %}">
+            <i class="fas fa-home"></i>
+            Página Inicial
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        Coleções
+    </li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block body %}
+<div class="col-md-12">
+    <div class="container-fluid">
+        <div id="container-colecao-dados"
+            hx-get="{% url 'colecao:create' %}"
+            hx-vals='{"colecao_id": "{{ colecao.id }}"}'
+            hx-trigger="load"
+            hx-swap="innerHTML">
+        </div>
+        <div id="container-colecao-list"
+            hx-get="{% url 'colecao:list' %}"
+            hx-vals='{"colecao_id": "{{ colecao.id }}"}'
+            hx-trigger="load, hx-list-updated from:body"
+            hx-swap="innerHTML">
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block extra_javascript %}
+    <!--HTMX-->
+    <script src="https://unpkg.com/htmx.org@1.6.0" crossorigin="anonymous"
+        integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D">
+    </script>
+{% endblock extra_javascript %}
