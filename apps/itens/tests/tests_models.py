@@ -2,7 +2,7 @@ from django.test import TestCase
 from apps.itens.models import Item
 
 # Rodar o teste com o seguinte comando:
-# python manage.py test apps.itens.tests
+# python manage.py test apps.itens.tests.tests_models
 
 
 class ItemTestCase(TestCase):

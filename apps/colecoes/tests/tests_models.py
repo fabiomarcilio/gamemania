@@ -3,7 +3,7 @@ from apps.colecoes.models import Colecao
 from apps.usuarios.models import Usuario
 
 # Rodar o teste com o seguinte comando:
-# python manage.py test apps.colecoes.tests
+# python manage.py test apps.colecoes.tests.tests_models
 
 
 class ColecaoTestCase(TestCase):

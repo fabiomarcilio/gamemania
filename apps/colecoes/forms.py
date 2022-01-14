@@ -13,13 +13,13 @@ class ColecaoModelForm(forms.ModelForm):
                                                                                  attrs={'type': 'date', 'class': 'form-control mask-data'}))
     valor_estimado = forms.CharField(required=False, label='Valor estimado', widget=forms.TextInput(
         attrs={'class': 'form-control capitalizar'}))
-    foto = forms.FileInput(attrs={
-        'class': 'form-control',
-        'style': 'display:none',
-        'id': 'foto-colecao-input', 'required': False,
-        'capture': 'user', 'accept': 'image/*'
-    })
+    # foto = forms.FileInput(attrs={
+    #     'class': 'form-control',
+    #     'style': 'display:none',
+    #     'id': 'foto-colecao-input', 'required': False,
+    #     'capture': 'user', 'accept': 'image/*'
+    # })
 
     class Meta:
         model = Colecao
-        fields = ['nome', 'descricao', 'data_inicio', 'valor_estimado', 'foto']
+        fields = ['nome', 'descricao', 'data_inicio', 'valor_estimado']

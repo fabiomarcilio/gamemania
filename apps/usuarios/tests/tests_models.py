@@ -2,7 +2,7 @@ from django.test import TestCase
 from apps.usuarios.models import Usuario
 
 # Rodar o teste com o seguinte comando:
-# python manage.py test apps.usuarios.tests
+# python manage.py test apps.usuarios.tests.tests_models
 
 
 class UsuarioTestCase(TestCase):
