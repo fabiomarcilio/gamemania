@@ -26,11 +26,11 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Foto</th>
                                     <th>Nome</th>
                                     <th>Descrição</th>
                                     <th>data_inicio</th>
                                     <th>valor_estimado</th>
-                                    <th>foto</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -38,11 +38,17 @@
                                 {% for colecao in colecoes %}
                                     <tr>
                                         <td>{{ colecao.id }}</td>
+                                        <td>
+                                            {% if colecao.foto.url %}
+                                                <img src='{{ colecao.foto.url }}' width='70px' height='70px' href="#"/>
+                                            {% else %}
+                                                "<img src='{% static 'dist/img/sem-foto.gif' %}' width='300' height='200'/>"
+                                            {% endif %}
+                                        </td>
                                         <td>{{ colecao.nome }}</td>
                                         <td>{{ colecao.descricao }}</td>
                                         <td>{{ colecao.data_inicio }}</td>
                                         <td>{{ colecao.valor_estimado }}</td>
-                                        <td>{{ colecao.foto }}</td>
                                         <td>
                                             <a hx-trigger="click"
                                                 href="#"

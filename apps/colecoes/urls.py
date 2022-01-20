@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (ColecaoTemplateView, ColecaoHtmxListView, ColecaoHtmxCreateView,
                     ColecaoHtmxUpdateView, ColecaoHtmxDeleteView)
 
+
 app_name = 'colecao'
 
 urlpatterns = [

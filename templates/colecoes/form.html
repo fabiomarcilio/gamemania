@@ -22,12 +22,14 @@
             hx-get="{% url 'colecao:create' %}"
             hx-vals='{"colecao_id": "{{ colecao.id }}"}'
             hx-trigger="load"
+            hx-encoding="multipart/form-data"
             hx-swap="innerHTML">
         </div>
         <div id="container-colecao-list"
             hx-get="{% url 'colecao:list' %}"
             hx-vals='{"colecao_id": "{{ colecao.id }}"}'
             hx-trigger="load, hx-list-updated from:body"
+            hx-encoding="multipart/form-data"
             hx-swap="innerHTML">
         </div>
     </div>

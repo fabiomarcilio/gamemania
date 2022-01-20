@@ -1,14 +1,14 @@
 
-$(".capitalizar").blur(function () {
-    if (this.value) {
-        this.value = Capitalizar(this.value);
-    }
-});
+// $(".capitalizar").blur(function () {
+//     if (this.value) {
+//         this.value = Capitalizar(this.value);
+//     }
+// });
 
-$(document).on("submit", function () {
-    // remove máscaras no submit do form
-    $('.mask-data').unmask();
-});
+// $(document).on("submit", function () {
+//     // remove máscaras no submit do form
+//     $('.mask-data').unmask();
+// });
 
 
 // Confirmação Sweet Alert chamada pelo htmx para exclusão de registros.
