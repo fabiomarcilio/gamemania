@@ -14,11 +14,28 @@
             action="{% url 'item:create' %}"
         {% endif %}
         hx-target="#container-item-dados"
+        enctype="multipart/form-data"
         hx-swap="innerHTML">
         {% csrf_token %}
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-1">
+                    {{ form.foto }}
+                    <div class="widget-user-image">
+                        <img id="img-foto"
+                            alt="Item"
+                            class="img-fluid elevation-2 foto-item 
+                                btn btn-light form-control foto-header"
+                            style="width: 90px; height: 90px; padding: 0px;"
+                            {% if item.foto %} 
+                                src="{{ item.foto.url }}"
+                            {% else %}
+                                src="{% static 'dist/img/sem-foto.gif' %}" 
+                            {% endif %}
+                        >
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div class="form-group">
                         {{ form.nome.label_tag }}
                         {{ form.nome }}
@@ -51,10 +68,11 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+                <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </form>
 </div>
+<script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

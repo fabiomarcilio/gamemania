@@ -14,7 +14,7 @@ class Colecao(models.Model):
     data_inicio = models.DateField(blank=True, null=True)
     valor_estimado = models.CharField(max_length=255, blank=True, null=True)
     foto = models.ImageField(blank=True, null=True,
-                             upload_to='usuarios')
+                             upload_to='colecoes')
 
     class Meta:
         db_table = 'colecoes'

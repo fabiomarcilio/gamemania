@@ -14,11 +14,28 @@
             action="{% url 'usuario:create' %}"
         {% endif %}
         hx-target="#container-usuario-dados"
+        enctype="multipart/form-data"
         hx-swap="innerHTML">
         {% csrf_token %}
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-1">
+                    {{ form.foto }}
+                    <div class="widget-user-image">
+                        <img id="img-foto"
+                            alt="Usuario"
+                            class="img-fluid elevation-2 foto-usuario 
+                                btn btn-light form-control foto-header"
+                            style="width: 90px; height: 90px; padding: 0px;"
+                            {% if usuario.foto %} 
+                                src="{{ usuario.foto.url }}"
+                            {% else %}
+                                src="{% static 'dist/img/sem-foto.gif' %}" 
+                            {% endif %}
+                        >
+                    </div>
+                </div>
+                <div class="col-md-7">
                     <div class="form-group">
                         {{ form.nome.label_tag }}
                         {{ form.nome }}
@@ -36,17 +53,6 @@
                         {{ form.telefone }}
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {{ form.data_nascimento.label_tag }}
-                        {{ form.data_nascimento }}
-                        {% comment %} {% for error in form.data_nascimento %}
-                            <div class="invalid-feedback">
-                                {{ error }}
-                            </div>
-                        {% endfor %} {% endcomment %}
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -55,10 +61,16 @@
                         {{ form.email }}
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         {{ form.redes_sociais.label_tag }}
                         {{ form.redes_sociais }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        {{ form.data_nascimento.label_tag }}
+                        {{ form.data_nascimento }}
                     </div>
                 </div>
             </div>
@@ -102,11 +114,6 @@
                     </div>
                 </div>
             </div>
-            {% comment %} <div class="col-md-2">
-                <div class="form-group">
-                    {{ form.foto }}
-                </div>
-            </div>{% endcomment %}
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
@@ -116,4 +123,5 @@
 
 <script src="{% static 'dist/js/usuarios.js' %}"></script>
 <script src="{% static 'dist/js/cep.js' %}"></script>
+<script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

@@ -37,7 +37,8 @@ class Usuario(models.Model):
                             db_index=True, error_messages={"unique": "Usuário já cadastrado"})
     cpf = models.CharField(max_length=11, blank=True, null=True, error_messages={
                            "unique": "CPF já cadastrado"})
-    foto = models.ImageField()
+    foto = models.ImageField(blank=True, null=True,
+                             upload_to='usuarios')
     data_nascimento = models.DateField(blank=True, null=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)
     email = models.CharField(max_length=255, blank=True,

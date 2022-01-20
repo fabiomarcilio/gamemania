@@ -47,6 +47,7 @@ class ColecaoHtmxUpdateView(SuccessMessageMixin, UpdateView):
         context['colecao_id'] = colecao_id
         colecao = Colecao.objects.get(id=colecao_id)
         form_colecao = ColecaoModelForm(initial=colecao.__dict__)
+        context['colecao'] = colecao
         context['form'] = form_colecao
         return context
 

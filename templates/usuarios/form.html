@@ -23,12 +23,14 @@
             hx-get="{% url 'usuario:create' %}"
             hx-vals='{"usuario_id": "{{ usuario.id }}"}'
             hx-trigger="load"
+            enctype="multipart/form-data"
             hx-swap="innerHTML">
         </div>
         <div id="container-usuario-list"
             hx-get="{% url 'usuario:list' %}"
             hx-vals='{"usuario_id": "{{ usuario.id }}"}'
             hx-trigger="load, hx-list-updated from:body"
+            enctype="multipart/form-data"
             hx-swap="innerHTML">
         </div>
     </div>

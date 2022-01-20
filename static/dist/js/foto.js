@@ -1,17 +1,17 @@
 $(document).ready(function (e) {
-    $("#img-foto-usuario").on("click", imgFotoClickHandler);
-    $('#foto-usuario-input').on("change", fotoUsuarioChangeHandler);
+    $("#img-foto").on("click", imgFotoClickHandler);
+    $('#foto-input').on("change", fotoChangeHandler);
 });
 
 function imgFotoClickHandler() {
-    $("#foto-usuario-input").click();
+    $("#foto-input").click();
 }
 
-function fotoUsuarioChangeHandler() {
+function fotoChangeHandler() {
     const reader = new FileReader();
     reader.onload = function (event) {
         // troca a imagem no frontend
-        $('#img-foto-usuario').attr("src", event.target.result);
+        $('#img-foto').attr("src", event.target.result);
     };
     // lê o arquivo de imagem como data URL
     reader.readAsDataURL(this.files[0]);

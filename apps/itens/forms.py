@@ -15,10 +15,16 @@ class ItemModelForm(forms.ModelForm):
         attrs={'class': 'form-control capitalizar'}))
     cor = forms.CharField(required=False, label='Cor', widget=forms.TextInput(
         attrs={'class': 'form-control capitalizar'}))
+    foto = forms.ImageField(widget=forms.FileInput(attrs={
+                            'class': 'form-control',
+                            'style': 'display:none',
+                            'id': 'foto-input',
+                            'required': False,
+                            'capture': 'user', 'accept': 'image/*'}))
 
     class Meta:
         model = Item
-        fields = ['nome', 'descricao', 'marca', 'modelo', 'cor']
+        fields = ['nome', 'descricao', 'marca', 'modelo', 'cor', 'foto']
 
 
 class ItemUsuarioModelForm(forms.ModelForm):

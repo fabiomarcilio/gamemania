@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Foto</th>
+                                    {% comment %} <th>Foto</th> {% endcomment %}
                                     <th>Nome</th>
                                     <th>Descrição</th>
                                     <th>data_inicio</th>
@@ -38,13 +38,13 @@
                                 {% for colecao in colecoes %}
                                     <tr>
                                         <td>{{ colecao.id }}</td>
-                                        <td>
+                                        {% comment %} <td>
                                             {% if colecao.foto.url %}
                                                 <img src='{{ colecao.foto.url }}' width='70px' height='70px' href="#"/>
                                             {% else %}
                                                 "<img src='{% static 'dist/img/sem-foto.gif' %}' width='300' height='200'/>"
                                             {% endif %}
-                                        </td>
+                                        </td> {% endcomment %}
                                         <td>{{ colecao.nome }}</td>
                                         <td>{{ colecao.descricao }}</td>
                                         <td>{{ colecao.data_inicio }}</td>

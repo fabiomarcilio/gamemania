@@ -1,3 +1,4 @@
+from attr import attrs
 from django import forms
 
 from apps.usuarios.models import Usuario, UFS_SIGLAS
@@ -9,7 +10,12 @@ class UsuarioModelForm(forms.ModelForm):
                            widget=forms.TextInput(attrs={'class': 'form-control capitalizar'}))
     cpf = forms.CharField(label='CPF', widget=forms.TextInput(
         attrs={'class': 'form-control mask-cpf'}))
-    foto = forms.ImageField(required=False)
+    foto = forms.ImageField(widget=forms.FileInput(attrs={
+                            'class': 'form-control',
+                            'style': 'display:none',
+                            'id': 'foto-input',
+                            'required': False,
+                            'capture': 'user', 'accept': 'image/*'}))
     data_nascimento = forms.CharField(label='Data de nascimento', widget=forms.DateInput(format='%Y-%m-%d',
                                                                                          attrs={'type': 'date', 'class': 'form-control mask-data'}))
     telefone = forms.CharField(

@@ -9,6 +9,8 @@ class Item(models.Model):
     marca = models.CharField(max_length=255, blank=True, null=True)
     modelo = models.CharField(max_length=255, blank=True, null=True)
     cor = models.CharField(max_length=255, blank=True, null=True)
+    foto = models.ImageField(blank=True, null=True,
+                             upload_to='itens')
 
     class Meta:
         db_table = 'itens'

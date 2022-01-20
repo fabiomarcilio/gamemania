@@ -46,6 +46,7 @@ class UsuarioHtmxUpdateView(SuccessMessageMixin, UpdateView):
         context['usuario_id'] = usuario_id
         usuario = Usuario.objects.get(id=usuario_id)
         form_usuario = UsuarioModelForm(initial=usuario.__dict__)
+        context['usuario'] = usuario
         context['form'] = form_usuario
         return context
 

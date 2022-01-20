@@ -23,13 +23,23 @@
         {% csrf_token %}
         <div class="card-body">
             <div class="row">
-                <div class="col-md-2">
-                    {{ form.usuario.label_tag }}
-                    {{ form.usuario }}
+                <div class="col-md-1">
+                    {{ form.foto }}
+                    <div class="widget-user-image">
+                        <img id="img-foto"
+                            alt="Colecao"
+                            class="img-fluid elevation-2 foto-colecao 
+                                btn btn-light form-control foto-header"
+                            style="width: 90px; height: 90px; padding: 0px;"
+                            {% if colecao.foto %} 
+                                src="{{ colecao.foto.url }}"
+                            {% else %}
+                                src="{% static 'dist/img/sem-foto.gif' %}" 
+                            {% endif %}
+                        >
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="form-group">
                         {{ form.nome.label_tag }}
                         {{ form.nome }}
@@ -57,10 +67,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                {{ form.foto.label_tag }}
-                {{ form.foto }}
-            </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
@@ -68,5 +74,5 @@
     </form>
 </div>
 <script src="{% static 'dist/js/colecao.js' %}"></script>
-{% comment %} <script src="{% static 'dist/js/foto.js' %}"></script> {% endcomment %}
+<script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

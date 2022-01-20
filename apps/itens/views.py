@@ -45,6 +45,7 @@ class ItemHtmxUpdateView(SuccessMessageMixin, UpdateView):
         context['item_id'] = item_id
         item = Item.objects.get(id=item_id)
         form_item = ItemModelForm(initial=item.__dict__)
+        context['item'] = item
         context['form'] = form_item
         return context
 
