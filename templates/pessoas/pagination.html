@@ -1,0 +1,80 @@
+<div class="row text-center">
+    <div class="col-lg-12">
+      <ul class="pagination">
+  
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              hx-get="{% url 'pessoa:list' %}?page={{page_obj.previous_page_number}}"
+              hx-target="#container-pessoa-list"
+            >&laquo;</a>
+          </li>
+        {% endif %}
+  
+        {% for pg in page_obj.paginator.page_range %}
+          <!-- Sempre mostra as 2 primeiras e 2 últimas páginas -->
+          {% if pg == 1 or pg == 2 or pg == page_obj.paginator.num_pages or pg == page_obj.paginator.num_pages|add:'-1' %}
+  
+            {% if page_obj.number == pg %}
+              <li class="page-item active">
+                <a
+                  class="page-link"
+                  hx-get="{% url 'pessoa:list' %}?page={{pg}}"
+                  hx-target="#container-pessoa-list"
+                >{{ pg }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  hx-get="{% url 'pessoa:list' %}?page={{pg}}"
+                  hx-target="#container-pessoa-list"
+                >{{ pg }}</a>
+              </li>
+            {% endif %}
+  
+          {% else %}
+  
+            {% if page_obj.number == pg %}
+              <li class="page-item active">
+                <a
+                  class="page-link"
+                  hx-get="{% url 'pessoa:list' %}?page={{pg}}"
+                  hx-target="#container-pessoa-list"
+                >{{ pg }}</a>
+              </li>
+            {% elif pg > page_obj.number|add:'-3' and pg < page_obj.number|add:'3' %}
+              <!-- Mostra 2 páginas antes e 2 páginas depois da atual -->
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  hx-get="{% url 'pessoa:list' %}?page={{pg}}"
+                  hx-target="#container-pessoa-list"
+                >{{ pg }}</a>
+              </li>
+            {% elif pg == page_obj.number|add:'-3' or pg == page_obj.number|add:'3' %}
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  hx-get=""
+                >...</a>
+              </li>
+            {% endif %}
+  
+          {% endif %}
+        {% endfor %}
+  
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              hx-get="{% url 'pessoa:list' %}?page={{page_obj.next_page_number}}"
+              hx-target="#container-pessoa-list"
+            >&raquo;</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>

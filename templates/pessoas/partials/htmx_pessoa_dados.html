@@ -7,13 +7,13 @@
         <h3 class="card-title">Cadastro de Usuário</h3>
     </div>
     <form method="POST"
-        id="form_usuario_dados"
-        {% if usuario_id %}
-            action="{% url 'usuario:update' usuario_id %}"
+        id="form_pessoa_dados"
+        {% if pessoa_id %}
+            action="{% url 'pessoa:update' pessoa_id %}"
         {% else %}
-            action="{% url 'usuario:create' %}"
+            action="{% url 'pessoa:create' %}"
         {% endif %}
-        hx-target="#container-usuario-dados"
+        hx-target="#container-pessoa-dados"
         enctype="multipart/form-data"
         hx-swap="innerHTML">
         {% csrf_token %}
@@ -23,12 +23,12 @@
                     {{ form.foto }}
                     <div class="widget-user-image">
                         <img id="img-foto"
-                            alt="Usuario"
-                            class="img-fluid elevation-2 foto-usuario 
+                            alt="Pessoa"
+                            class="img-fluid elevation-2 foto-pessoa 
                                 btn btn-light form-control foto-header"
                             style="width: 90px; height: 90px; padding: 0px;"
-                            {% if usuario.foto %} 
-                                src="{{ usuario.foto.url }}"
+                            {% if pessoa.foto %} 
+                                src="{{ pessoa.foto.url }}"
                             {% else %}
                                 src="{% static 'dist/img/sem-foto.gif' %}" 
                             {% endif %}
@@ -143,7 +143,7 @@
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-<script src="{% static 'dist/js/usuarios.js' %}"></script>
+<script src="{% static 'dist/js/pessoa.js' %}"></script>
 <script src="{% static 'dist/js/cep.js' %}"></script>
 <script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

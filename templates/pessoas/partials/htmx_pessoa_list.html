@@ -1,0 +1,92 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+{% comment %} {% load custom_filters %} {% endcomment %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3 class="card-title">Usuários Cadastrados</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="table first-fixed last-fixed">
+                <div class="card-body table-responsive p-0">
+                    <div class="table-scroll">
+                        <table class="table table-hover text-nowrap table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Data de nascimento</th>
+                                    <th>E-mail</th>
+                                    <th>Redes Sociais</th>
+                                    <th>CEP</th>
+                                    <th>Logradouro</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>UF</th>
+                                    <th>Numero</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pessoa in pessoas %}
+                                    <tr>
+                                        <td>{{ pessoa.id }}</td>
+                                        <td>{{ pessoa.nome }}</td>
+                                        <td class="mask-cpf">{{ pessoa.cpf }}</td>
+                                        <td class="mask-telefone">{{ pessoa.telefone }}</td>
+                                        <td>{{ pessoa.data_nascimento|date:"d/m/Y" }}</td>
+                                        <td>{{ pessoa.email }}</td>
+                                        <td>{{ pessoa.redes_sociais }}</td>
+                                        <td class="mask-cep">{{ pessoa.cep }}</td>
+                                        <td>{{ pessoa.logradouro }}</td>
+                                        <td>{{ pessoa.bairro }}</td>
+                                        <td>{{ pessoa.cidade }}</td>
+                                        <td>{{ pessoa.uf }}</td>
+                                        <td>{{ pessoa.numero }}</td>
+                                        <td>
+                                            <a hx-trigger="click"
+                                                href="#"
+                                                hx-get="{% url 'pessoa:update' pessoa.id %}"
+                                                hx-target="#container-pessoa-dados"
+                                                hx-swap="innerHTML">
+                                                Editar | 
+                                            </a>
+                                            <a hx-trigger="confirmado"
+                                                href="#"
+                                                hx-delete="{% url 'pessoa:delete' pessoa.id %}"
+                                                hx-target="#container-pessoa-list"
+                                                hx-swap="innerHTML"
+                                                _="on click
+                                                call showDeleteConfirmationWindow(event)
+                                                if 
+                                                result.value trigger confirmado">
+                                                Excluir
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'pessoas/pagination.html' %}
+    </div>
+</div>
+{% endblock content %}

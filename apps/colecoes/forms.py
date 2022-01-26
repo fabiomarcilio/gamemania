@@ -1,7 +1,7 @@
 from django import forms
 
 from apps.colecoes.models import Colecao
-from apps.usuarios.models import Usuario
+from apps.pessoas.models import Pessoa
 
 
 class ColecaoModelForm(forms.ModelForm):

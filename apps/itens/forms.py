@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.itens.models import Item, ItemUsuario
+from apps.itens.models import Item, ItemPessoa
 
 
 class ItemModelForm(forms.ModelForm):
@@ -27,8 +27,8 @@ class ItemModelForm(forms.ModelForm):
         fields = ['nome', 'descricao', 'marca', 'modelo', 'cor', 'foto']
 
 
-class ItemUsuarioModelForm(forms.ModelForm):
+class ItemPessoaModelForm(forms.ModelForm):
 
     class Meta:
-        model = ItemUsuario
+        model = ItemPessoa
         fields = '__all__'

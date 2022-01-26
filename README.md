@@ -7,9 +7,8 @@ Tecnologias utilizadas:
 - Javascript/Jquery
 - CSS
 - HTML5
-
+- HTMX
 - AdminLTE
 - Bootstrap4
-
-- BD Sqlite
+- BD Postgres
 

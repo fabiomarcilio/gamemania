@@ -19,12 +19,16 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+app_name = 'gamemania'
+
 urlpatterns = [
     path('', include('apps.core.urls')),
     path('colecoes/', include('apps.colecoes.urls')),
     path('itens/', include('apps.itens.urls')),
-    path('usuarios/', include('apps.usuarios.urls')),
+    # path('usuarios/', include('apps.usuarios.urls')),
+    path('pessoas/', include('apps.pessoas.urls')),
     path('admin/', admin.site.urls),
+    path('contas/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
