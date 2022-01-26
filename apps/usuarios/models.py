@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.constraints import UniqueConstraint
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 

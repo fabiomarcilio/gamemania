@@ -47,17 +47,17 @@
                                     <tr>
                                         <td>{{ pessoa.id }}</td>
                                         <td>{{ pessoa.nome }}</td>
-                                        <td class="mask-cpf">{{ pessoa.cpf }}</td>
-                                        <td class="mask-telefone">{{ pessoa.telefone }}</td>
+                                        <td class="mask-cpf">{{ pessoa.cpf|default_if_none:"" }}</td>
+                                        <td class="mask-telefone">{{ pessoa.telefone|default_if_none:"" }}</td>
                                         <td>{{ pessoa.data_nascimento|date:"d/m/Y" }}</td>
                                         <td>{{ pessoa.email }}</td>
-                                        <td>{{ pessoa.redes_sociais }}</td>
+                                        <td>{{ pessoa.redes_sociais|default_if_none:"" }}</td>
                                         <td class="mask-cep">{{ pessoa.cep }}</td>
-                                        <td>{{ pessoa.logradouro }}</td>
-                                        <td>{{ pessoa.bairro }}</td>
-                                        <td>{{ pessoa.cidade }}</td>
-                                        <td>{{ pessoa.uf }}</td>
-                                        <td>{{ pessoa.numero }}</td>
+                                        <td>{{ pessoa.logradouro|default_if_none:"" }}</td>
+                                        <td>{{ pessoa.bairro|default_if_none:"" }}</td>
+                                        <td>{{ pessoa.cidade|default_if_none:"" }}</td>
+                                        <td>{{ pessoa.uf|default_if_none:"" }}</td>
+                                        <td>{{ pessoa.numero|default_if_none:"" }}</td>
                                         <td>
                                             <a hx-trigger="click"
                                                 href="#"

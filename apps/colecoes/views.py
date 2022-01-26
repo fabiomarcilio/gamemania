@@ -31,6 +31,11 @@ class ColecaoHtmxCreateView(SuccessMessageMixin, CreateView):
     sucess_message = 'Coleção cadastrada!'
     success_url = 'form'
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.pessoa_id = user.id
+        return super().form_valid(form)
+
 
 class ColecaoHtmxUpdateView(SuccessMessageMixin, UpdateView):
     model = Colecao

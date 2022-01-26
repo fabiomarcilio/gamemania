@@ -50,7 +50,7 @@ class Pessoa(models.Model):
     bairro = models.CharField(max_length=255, blank=True, null=True)
     cidade = models.CharField(max_length=255, blank=True, null=True)
     uf = models.CharField(
-        max_length=2, blank=False, null=False, choices=UFS_SIGLAS, default='SP')
+        max_length=2, blank=True, null=False, choices=UFS_SIGLAS, default='SP')
     numero = models.DecimalField(
         max_digits=5, decimal_places=0, blank=True, null=True)
 
