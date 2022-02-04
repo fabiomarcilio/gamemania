@@ -15,6 +15,13 @@ from .models import Colecao
 class ColecaoTemplateView(SuccessMessageMixin, TemplateView):
     template_name = 'colecoes/form.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        colecao = Colecao.object.filter(
+            usuario=self.request.user)
+        context["colecao"] = colecao
+        return context
+
 
 class ColecaoHtmxListView(SuccessMessageMixin, ListView):
     model = Colecao
@@ -34,6 +41,7 @@ class ColecaoHtmxCreateView(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
         form.instance.pessoa_id = user.id
+        form.instance.id = user.id
         return super().form_valid(form)
 
 

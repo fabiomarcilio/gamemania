@@ -41,10 +41,38 @@ INSTALLED_APPS = [
     'apps.colecoes',
     'apps.itens',
     'apps.usuarios',
-    'apps.pessoas',
+    # 'apps.pessoas',
 ]
 
+# SHARED_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     # 'apps.colecoes',
+#     # 'apps.itens',
+#     # 'apps.usuarios',
+#     # 'apps.pessoas',
+# ]
+
+# TENANT_APPS = [
+#     'tenant_schemas',
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     'apps.colecoes',
+#     'apps.itens',
+#     'apps.usuarios',
+#     'apps.pessoas',
+# ]
+
 MIDDLEWARE = [
+    # 'tenant_schemas.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,6 +168,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'core:index'
 LOGOUT_REDIRECT_URL = 'core:index'
+
+# TENANT_MODEL =  'shared.client'
 
 # carrega as configurações locais a partir do arquivo .local_settings.py
 try:

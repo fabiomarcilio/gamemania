@@ -35,10 +35,16 @@
                         >
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-3">
                     <div class="form-group">
-                        {{ form.nome.label_tag }}
-                        {{ form.nome }}
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -143,7 +149,7 @@
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-<script src="{% static 'dist/js/usuarios.js' %}"></script>
+<script src="{% static 'dist/js/usuario.js' %}"></script>
 <script src="{% static 'dist/js/cep.js' %}"></script>
 <script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

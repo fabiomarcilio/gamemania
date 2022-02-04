@@ -11,21 +11,6 @@ $(document).on("submit", function () {
 });
 
 
-// Confirmação Sweet Alert chamada pelo htmx para exclusão de registros.
-function showDeleteConfirmationWindow(event) {
-    event.preventDefault();  // evita a rolagem da tela ao clicar no link
-    return Swal.fire({
-        title: "Atenção!",
-        text: "Deseja realmente apagar este registro?",
-        showCancelButton: true,
-        reverseButtons: true,
-        confirmButtonText: "Sim, apagar!",
-        confirmButtonColor: "#dc3545",
-        cancelButtonText: "Cancelar",
-        cancelButtonColor: "#17a2b8",
-    });
-};
-
 function Capitalizar(nome) {
     // remove espaços duplicados e divide o nome
     let nomes = nome.toLowerCase().replace("  ", " ").split(" ");

@@ -20,12 +20,17 @@
 <div class="col-md-12">
     <div class="container-fluid">
         <div id="container-usuario-dados"
-            hx-get="{% url 'usuario:create' %}"
+            {% if user.is_superuser %}
+                hx-get="{% url 'usuario:create' %}"
+            {% else %}
+                hx-get="{% url 'usuario:update' user.id %}"
+            {% endif %} 
             hx-vals='{"usuario_id": "{{ usuario.id }}"}'
             hx-trigger="load"
             enctype="multipart/form-data"
             hx-swap="innerHTML">
         </div>
+        {% if user.is_superuser %}
         <div id="container-usuario-list"
             hx-get="{% url 'usuario:list' %}"
             hx-vals='{"usuario_id": "{{ usuario.id }}"}'
@@ -33,6 +38,7 @@
             enctype="multipart/form-data"
             hx-swap="innerHTML">
         </div>
+        {% endif %} 
     </div>
 </div>
 

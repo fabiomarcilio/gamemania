@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.pessoas.models import Pessoa
+from apps.usuarios.models import CustomUsuario
 
 
 class Item(models.Model):
@@ -24,8 +24,8 @@ class Item(models.Model):
 class ItemPessoa(models.Model):
     item = models.ForeignKey(Item, related_name='itens',
                              blank=True, null=True, on_delete=models.PROTECT)
-    pessoa = models.ForeignKey(
-        Pessoa, related_name='pessoas', blank=True, null=True, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(
+        CustomUsuario, related_name='pessoas', blank=True, null=True, on_delete=models.PROTECT)
     foto = models.ImageField()
     data_compra = models.DateField(blank=True, null=True)
     valor_pago = models.DecimalField(
@@ -36,9 +36,9 @@ class ItemPessoa(models.Model):
     disponivel_venda = models.BooleanField()
 
     class Meta:
-        db_table = 'itens_pessoa'
-        verbose_name = 'Item_pessoa'
-        verbose_name_plural = 'Itens_pessoa'
+        db_table = 'itens_usuario'
+        verbose_name = 'Item_usuario'
+        verbose_name_plural = 'Itens_usuario'
 
     def __str__(self) -> str:
-        return self.item_pessoa
+        return self.item_usuario

@@ -28,6 +28,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Sobrenome</th>
                                     <th>CPF</th>
                                     <th>Telefone</th>
                                     <th>Data de nascimento</th>
@@ -46,18 +47,19 @@
                                 {% for usuario in usuarios %}
                                     <tr>
                                         <td>{{ usuario.id }}</td>
-                                        <td>{{ usuario.nome }}</td>
-                                        <td class="mask-cpf">{{ usuario.cpf }}</td>
-                                        <td class="mask-telefone">{{ usuario.telefone }}</td>
+                                        <td>{{ usuario.first_name|default_if_none:"" }}</td>
+                                        <td>{{ usuario.last_name|default_if_none:"" }}</td>
+                                        <td class="mask-cpf">{{ usuario.cpf|default_if_none:"" }}</td>
+                                        <td class="mask-telefone">{{ usuario.telefone|default_if_none:"" }}</td>
                                         <td>{{ usuario.data_nascimento|date:"d/m/Y" }}</td>
                                         <td>{{ usuario.email }}</td>
-                                        <td>{{ usuario.redes_sociais }}</td>
-                                        <td class="mask-cep">{{ usuario.cep }}</td>
-                                        <td>{{ usuario.logradouro }}</td>
-                                        <td>{{ usuario.bairro }}</td>
-                                        <td>{{ usuario.cidade }}</td>
-                                        <td>{{ usuario.uf }}</td>
-                                        <td>{{ usuario.numero }}</td>
+                                        <td>{{ usuario.redes_sociais|default_if_none:"" }}</td>
+                                        <td class="mask-cep">{{ usuario.cep|default_if_none:"" }}</td>
+                                        <td>{{ usuario.logradouro|default_if_none:"" }}</td>
+                                        <td>{{ usuario.bairro|default_if_none:"" }}</td>
+                                        <td>{{ usuario.cidade|default_if_none:"" }}</td>
+                                        <td>{{ usuario.uf|default_if_none:"" }}</td>
+                                        <td>{{ usuario.numero|default_if_none:"" }}</td>
                                         <td>
                                             <a hx-trigger="click"
                                                 href="#"

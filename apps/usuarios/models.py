@@ -1,5 +1,36 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db.models.constraints import UniqueConstraint
+
+UFS_SIGLAS = [
+    ('AC', 'Acre'),
+    ('AL', 'Alagoas'),
+    ('AP', 'Amapá'),
+    ('AM', 'Amazonas'),
+    ('BA', 'Bahia'),
+    ('CE', 'Ceará'),
+    ('DF', 'Distrito Federal'),
+    ('ES', 'Espírito Santo'),
+    ('GO', 'Goiás'),
+    ('MA', 'Maranhão'),
+    ('MT', 'Mato Grosso'),
+    ('MS', 'Mato Grosso do Sul'),
+    ('MG', 'Minas Gerais'),
+    ('PA', 'Pará'),
+    ('PB', 'Paraíba'),
+    ('PR', 'Paraná'),
+    ('PE', 'Pernambuco'),
+    ('PI', 'Piauí'),
+    ('RJ', 'Rio de Janeiro'),
+    ('RN', 'Rio Grande do Norte'),
+    ('RS', 'Rio Grande do Sul'),
+    ('RO', 'Rondônia'),
+    ('RR', 'Roraima'),
+    ('SC', 'Santa Catarina'),
+    ('SP', 'São Paulo'),
+    ('SE', 'Sergipe'),
+    ('TO', 'Tocantins'),
+]
 
 
 class UsuarioManager(BaseUserManager):
@@ -34,20 +65,53 @@ class UsuarioManager(BaseUserManager):
 
 
 class CustomUsuario(AbstractUser):
+
+    first_name = models.CharField(max_length=255, blank=False, null=False,
+                                  db_index=True, error_messages={"unique": "Pessoa já cadastrado"})
+    last_name = models.CharField(
+        max_length=255, blank=False, null=False, db_index=True)
+    cpf = models.CharField(max_length=11, blank=True, null=True, error_messages={
+                           "unique": "CPF já cadastrado"})
+    foto = models.ImageField(blank=True, null=True,
+                             upload_to='pessoas')
+    data_nascimento = models.DateField(blank=True, null=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
     email = models.CharField(max_length=255, blank=True,
                              null=True, db_index=True, unique=True)
+    redes_sociais = models.CharField(max_length=255, blank=True, null=True)
+    # Endereço:
+    cep = models.CharField(max_length=9, blank=True, null=True)
+    logradouro = models.CharField(max_length=255, blank=True, null=True)
+    bairro = models.CharField(max_length=255, blank=True, null=True)
+    cidade = models.CharField(max_length=255, blank=True, null=True)
+    uf = models.CharField(
+        max_length=2, blank=True, null=False, choices=UFS_SIGLAS, default='SP')
+    numero = models.DecimalField(
+        max_digits=5, decimal_places=0, blank=True, null=True)
+
+    # email = models.CharField(max_length=255, blank=True,
+    #                          null=True, db_index=True, unique=True)
     is_staff = models.BooleanField('Membro da equipe', default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     class Meta:
-        db_table = 'custom_usuarios'
+        db_table = 'usuarios'
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios'
 
+    constraints = [
+        UniqueConstraint(fields=['first_name'], name='pessoa_nome_unique'),
+        UniqueConstraint(fields=['cpf'], name='pessoa_cpf_unique'),
+        UniqueConstraint(fields=['cep'], name='pessoa_cep_unique')
+    ]
+
     def __str__(self) -> str:
-        return self.email
+        return self.first_name
+
+    # def __str__(self) -> str:
+    #     return self.email
 
     # Necessário especificar para o UserManager customizado funcionar e não o do django
     object = UsuarioManager()
