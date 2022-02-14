@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (ColecaoTemplateView, ColecaoHtmxListView, ColecaoHtmxCreateView,
-                    ColecaoHtmxUpdateView, ColecaoHtmxDeleteView)
+                    ColecaoHtmxUpdateView, ColecaoHtmxDeleteView, ColecaoHtmxAddItensView)
 
 
 app_name = 'colecao'
@@ -30,5 +30,10 @@ urlpatterns = [
         route='delete/<int:pk>/',
         view=ColecaoHtmxDeleteView.as_view(),
         name='delete'
+    ),
+    path(
+        route='adicionar_itens/',
+        view=ColecaoHtmxAddItensView.as_view(),
+        name='adicionar_itens'
     ),
 ]

@@ -1,0 +1,179 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3 class="card-title">Cadastrar itens na coleção {{ colecao }}</h3>
+                {% comment %} <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+            <!-- /.card-header -->
+            <div class="table first-fixed last-fixed">
+                <div class="card-body">
+                    <div class="row">
+                        {% comment %} <div class="col-md-1">
+                            {{ form.foto }}
+                            <div class="widget-user-image">
+                                <img id="img-foto"
+                                    alt="Colecao"
+                                    class="img-fluid elevation-2 foto-colecao 
+                                        btn btn-light form-control foto-header"
+                                    style="width: 90px; height: 90px; padding: 0px;"
+                                    {% if colecao.foto %} 
+                                        src="{{ colecao.foto.url }}"
+                                    {% else %}
+                                        src="{% static 'dist/img/sem-foto.gif' %}" 
+                                    {% endif %}
+                                >
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-md-1">
+                            {{ form.foto }}
+                            <div class="widget-user-image">
+                                <img id="img-foto"
+                                    alt="ItemColecao"
+                                    class="img-fluid elevation-2 foto-itemColecao 
+                                        btn btn-light form-control foto-header"
+                                    style="width: 90px; height: 90px; padding: 0px;"
+                                    {% if colecao.foto %} 
+                                        src="{{ item_colecao.foto.url }}"
+                                    {% else %}
+                                        src="{% static 'dist/img/sem-foto.gif' %}" 
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {{ form.item.label_tag }}
+                                {{ form.item }}
+                            </div>
+                        </div>
+        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {{ form.data_compra.label_tag }}
+                                {{ form.data_compra }}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {{ form.valor_pago.label_tag }}
+                                {{ form.valor_pago }}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {{ form.valor_venda.label_tag }}
+                                {{ form.valor_venda }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                {{ form.estado_item.label_tag }}
+                                {{ form.estado_item }}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+                                {{ form.disponivel_venda.label_tag }}
+                                {{ form.disponivel_venda }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </div>
+                        {% comment %} <div class="card-footer">
+                            <button class="btn btn-warning" hx-trigger="click"
+                                href="#"
+                                hx-get="{% url 'colecao:adicionar_itens' %}"
+                                hx-vals='{"colecao_id": "{{ colecao_id }}"}'
+                                hx-target="#container-colecao-list"
+                                hx-swap="innerHTML"
+                                {% if not colecao_id %}
+                                    disabled
+                                {% endif %}
+                                >Adicionar itens
+                            </button>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <div class="table-scroll">
+                        <table class="table table-hover text-nowrap table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    {% comment %} <th>Foto</th> {% endcomment %}
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>data_inicio</th>
+                                    <th>valor_estimado</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in itens_colecao %}
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        {% comment %} <td>
+                                            {% if item.foto.url %}
+                                                <img src='{{ item.foto.url }}' width='70px' height='70px' href="#"/>
+                                            {% else %}
+                                                "<img src='{% static 'dist/img/sem-foto.gif' %}' width='300' height='200'/>"
+                                            {% endif %}
+                                        </td> {% endcomment %}
+                                        <td>{{ item.nome }}</td>
+                                        <td>{{ item.descricao }}</td>
+                                        <td>{{ item.data_inicio }}</td>
+                                        <td>{{ item.valor_estimado }}</td>
+                                        <td>
+                                            {% comment %} <a hx-trigger="click"
+                                                href="#"
+                                                hx-get="{% url 'colecao:update' colecao.id %}"
+                                                hx-target="#container-colecao-dados"
+                                                hx-swap="innerHTML">
+                                                Editar | 
+                                            </a> {% endcomment %}
+                                            <a hx-trigger="confirmado"
+                                                href="#"
+                                                hx-delete="{% url 'colecao:delete' colecao.id %}"
+                                                hx-target="#container-colecao-list"
+                                                hx-swap="innerHTML"
+                                                _="on click
+                                                call showDeleteConfirmationWindow(event)
+                                                if 
+                                                result.value trigger confirmado">
+                                                Excluir
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'colecoes/pagination.html' %}
+    </div>
+</div>
+<script src="{% static 'dist/js/itemcolecao.js' %}"></script>
+<script src="{% static 'dist/js/foto.js' %}"></script>
+{% endblock content %}

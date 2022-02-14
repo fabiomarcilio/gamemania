@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.deletion import PROTECT
 
-from apps.itens.models import ItemPessoa
 from apps.usuarios.models import CustomUsuario
 
 

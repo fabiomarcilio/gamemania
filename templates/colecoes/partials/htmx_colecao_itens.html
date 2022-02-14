@@ -6,9 +6,9 @@
 {% endblock head_extra %}
 
 {% block content %}
-<div class="card card-primary shadow">
+<div class="card card-info shadow">
     <div class="card-header">
-        <h3 class="card-title">Cadastro de Coleções</h3>
+        <h3 class="card-title">Adicionar itens na coleção {{ colecao }}</h3>
     </div>
     <form method="POST"
         id="form_colecao_dados"
@@ -23,7 +23,7 @@
         {% csrf_token %}
         <div class="card-body">
             <div class="row">
-                <div class="col-md-1">
+                {% comment %} <div class="col-md-1">
                     {{ form.foto }}
                     <div class="widget-user-image">
                         <img id="img-foto"
@@ -38,40 +38,69 @@
                             {% endif %}
                         >
                     </div>
+                </div> {% endcomment %}
+                <div class="col-md-1">
+                    {{ form.foto }}
+                    <div class="widget-user-image">
+                        <img id="img-foto"
+                            alt="ItemColecao"
+                            class="img-fluid elevation-2 foto-itemColecao 
+                                btn btn-light form-control foto-header"
+                            style="width: 90px; height: 90px; padding: 0px;"
+                            {% if colecao.foto %} 
+                                src="{{ item_colecao.foto.url }}"
+                            {% else %}
+                                src="{% static 'dist/img/sem-foto.gif' %}" 
+                            {% endif %}
+                        >
+                    </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-5">
                     <div class="form-group">
-                        {{ form.nome.label_tag }}
-                        {{ form.nome }}
+                        {{ form.item.label_tag }}
+                        {{ form.item }}
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        {{ form.data_inicio.label_tag }}
-                        {{ form.data_inicio }}
+                        {{ form.data_compra.label_tag }}
+                        {{ form.data_compra }}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        {{ form.valor_estimado.label_tag }}
-                        {{ form.valor_estimado }}
+                        {{ form.valor_pago.label_tag }}
+                        {{ form.valor_pago }}
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-2">
                     <div class="form-group">
-                        {{ form.descricao.label_tag }}
-                        {{ form.descricao }}
+                        {{ form.valor_venda.label_tag }}
+                        {{ form.valor_venda }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        {{ form.estado_item.label_tag }}
+                        {{ form.estado_item }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                    <div class="form-group">
+                        {{ form.disponivel_venda.label_tag }}
+                        {{ form.disponivel_venda }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
                 </div>
-                <div class="card-footer">
+                {% comment %} <div class="card-footer">
                     <button class="btn btn-warning" hx-trigger="click"
                         href="#"
                         hx-get="{% url 'colecao:adicionar_itens' %}"
@@ -83,11 +112,11 @@
                         {% endif %}
                         >Adicionar itens
                     </button>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </form>
 </div>
-<script src="{% static 'dist/js/colecao.js' %}"></script>
+<script src="{% static 'dist/js/itemcolecao.js' %}"></script>
 <script src="{% static 'dist/js/foto.js' %}"></script>
 {% endblock content %}

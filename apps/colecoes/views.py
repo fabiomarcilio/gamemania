@@ -7,9 +7,10 @@ from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.messages.views import SuccessMessageMixin
 
-from apps.colecoes.forms import ColecaoModelForm
+from apps.colecoes.forms import ColecaoModelForm, ItemColecaoModelForm
 
 from .models import Colecao
+from apps.itens.models import ItemColecao
 
 
 class ColecaoTemplateView(SuccessMessageMixin, TemplateView):
@@ -78,4 +79,25 @@ class ColecaoHtmxDeleteView(SuccessMessageMixin, DeleteView):
         messages.success(request, self.success_message)
         response = render(request, self.template_name)
         response['HX-trigger'] = 'hx-list-updated'
+        return response
+
+
+class ColecaoHtmxAddItensView(ListView):
+    model = ItemColecao
+    template_name = 'colecoes/partials/htmx_colecao_itens.html'
+    context_object_name = 'itens'
+    # form_class = ItemColecaoModelForm
+    paginate_by = 5
+    ordering = '-id'
+
+    def get_context_data(self, **kwargs):
+        response = super().get_context_data(**kwargs)
+        # usuario = self.request.user
+        colecao_id = self.request.GET.get('colecao_id')
+        itens_colecao = ItemColecao.objects.filter(
+            colecao=colecao_id)
+        colecao = Colecao.objects.get(id=colecao_id)
+        response['form'] = ItemColecaoModelForm()
+        response['itens_colecao'] = itens_colecao
+        response['colecao'] = colecao.nome
         return response
