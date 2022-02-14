@@ -15,13 +15,6 @@ from .models import Colecao
 class ColecaoTemplateView(SuccessMessageMixin, TemplateView):
     template_name = 'colecoes/form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        colecao = Colecao.object.filter(
-            usuario=self.request.user)
-        context["colecao"] = colecao
-        return context
-
 
 class ColecaoHtmxListView(SuccessMessageMixin, ListView):
     model = Colecao
@@ -29,6 +22,13 @@ class ColecaoHtmxListView(SuccessMessageMixin, ListView):
     context_object_name = 'colecoes'
     paginate_by = 5
     ordering = '-id'
+
+    def get_context_data(self, **kwargs):
+        response = super().get_context_data(**kwargs)
+        usuario = self.request.user
+        colecao = Colecao.objects.filter(usuario=usuario.id)
+        response["colecoes"] = colecao
+        return response
 
 
 class ColecaoHtmxCreateView(SuccessMessageMixin, CreateView):
@@ -40,7 +40,7 @@ class ColecaoHtmxCreateView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         user = self.request.user
-        form.instance.pessoa_id = user.id
+        form.instance.usuario_id = user.id
         form.instance.id = user.id
         return super().form_valid(form)
 
@@ -78,5 +78,4 @@ class ColecaoHtmxDeleteView(SuccessMessageMixin, DeleteView):
         messages.success(request, self.success_message)
         response = render(request, self.template_name)
         response['HX-trigger'] = 'hx-list-updated'
-
         return response

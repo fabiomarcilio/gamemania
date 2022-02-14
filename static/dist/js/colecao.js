@@ -1,9 +1,20 @@
+$(document).ready(function (e) {
+    $("#id_valor_estimado").each(function (index, element) {
+        decimalMask(element);
+    });
+});
 
 $(".capitalizar").blur(function () {
     if (this.value) {
         this.value = Capitalizar(this.value);
     }
 });
+
+
+function decimalMask(element) {
+    const decimalPlaces = parseInt($(element).data("decimalPlaces"));
+    $(element).mask("000.000.000,00" + "9".repeat(decimalPlaces), { reverse: true });
+};
 
 $(document).on("submit", function () {
     // remove máscaras no submit do form
