@@ -68,21 +68,38 @@
                 </div>
             </div>
             <div class="row">
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-warning" hx-trigger="click"
-                        href="#"
-                        hx-get="{% url 'colecao:adicionar_itens' %}"
-                        hx-vals='{"colecao_id": "{{ colecao_id }}"}'
-                        hx-target="#container-colecao-list"
-                        hx-swap="innerHTML"
-                        {% if not colecao_id %}
-                            disabled
+                <div class="btn-group ">
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check mr-1"></i>
+                            Salvar
+                        </button>
+                    </div>
+                    <div class="card-footer">
+                        {% if colecao_id %}
+                            <a href="{% url 'colecao:form_itens' colecao_id %}">
                         {% endif %}
-                        >Adicionar itens
-                    </button>
+                            <button type="button" class="btn btn-warning"
+                                {% if not colecao_id %}
+                                    disabled
+                                {% endif %}>
+                                <i class="fas fa-solid fa-plus mr-1"></i>
+                                Adicionar itens
+                            </button> 
+                        </a>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'colecao:form' %}">
+                            <button type="button" class="btn btn-info"
+                            {% if not colecao_id %}
+                                disabled
+                            {% endif %}
+                            >
+                                <i class="fas fa-arrow-left mr-1"></i>
+                                Voltar
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

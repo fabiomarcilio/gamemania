@@ -41,7 +41,7 @@ class ItemColecaoModelForm(forms.ModelForm):
     estado_item = forms.CharField(required=False, label='Estado do item',
                                   widget=forms.TextInput(attrs={'class': 'form-control capitalizar'}))
     disponivel_venda = forms.BooleanField(
-        label='Colocar para venda', required=False, initial=True)
+        label='Colocar para venda', required=False, initial=False)
 
     foto = forms.ImageField(required=False, widget=forms.FileInput(attrs={
         'class': 'form-control',

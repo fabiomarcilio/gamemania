@@ -1,0 +1,89 @@
+{% extends 'base/base_htmx.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3 class="card-title">Coleções Cadastradas</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="table first-fixed last-fixed">
+                <div class="card-body table-responsive p-0">
+                    <div class="table-scroll">
+                        <table class="table table-hover text-nowrap table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    {% comment %} <th>Foto</th> {% endcomment %}
+                                    <th>Item</th>
+                                    <th>Data da compra</th>
+                                    <th>Valor pago</th>
+                                    <th>Valor de venda</th>
+                                    <th>Estado do item</th>
+                                    <th>Disponível para venda</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in itens_colecao %}
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        {% comment %} <td>
+                                            {% if item.foto.url %}
+                                                <img src='{{ item.foto.url }}' width='70px' height='70px' href="#"/>
+                                            {% else %}
+                                                "<img src='{% static 'dist/img/sem-foto.gif' %}' width='300' height='200'/>"
+                                            {% endif %}
+                                        </td> {% endcomment %}
+                                        <td>{{ item.item }}</td>
+                                        <td>{{ item.data_compra }}</td>
+                                        <td>{{ item.valor_pago }}</td>
+                                        <td>{{ item.valor_venda }}</td>
+                                        <td>{{ item.estado_item }}</td>
+                                        <td>{{ item.disponivel_venda }}</td>
+                                        <td>
+                                            <a hx-trigger="click"
+                                                href="#"
+                                                hx-get="{% url 'colecao:update' colecao.id %}"
+                                                hx-target="#container-colecao-dados"
+                                                hx-swap="innerHTML">
+                                                Editar | 
+                                            </a>
+                                            <a hx-trigger="confirmado"
+                                                href="#"
+                                                hx-delete="{% url 'colecao:delete' colecao.id %}"
+                                                hx-target="#container-colecao-list"
+                                                hx-swap="innerHTML"
+                                                _="on click
+                                                call showDeleteConfirmationWindow(event)
+                                                if 
+                                                result.value trigger confirmado">
+                                                Excluir
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'colecoes/pagination.html' %}
+    </div>
+</div>
+
+
+{% endblock content %}

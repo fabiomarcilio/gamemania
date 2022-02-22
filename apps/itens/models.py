@@ -27,8 +27,8 @@ class ItemColecao(models.Model):
                              blank=False, null=False, on_delete=models.PROTECT)
     colecao = models.ForeignKey(
         Colecao, related_name='colecoes', blank=False, null=False, on_delete=models.PROTECT)
-    # usuario = models.ForeignKey(
-    #     CustomUsuario, related_name='pessoas', blank=True, null=True, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(
+        CustomUsuario, related_name='usuarios', blank=False, null=False, on_delete=models.PROTECT)
     foto = models.ImageField()
     data_compra = models.DateField(blank=True, null=True)
     valor_pago = models.DecimalField(
@@ -36,7 +36,7 @@ class ItemColecao(models.Model):
     valor_venda = models.DecimalField(
         max_digits=7, decimal_places=2, blank=True, null=True)
     estado_item = models.CharField(max_length=100, blank=True, null=True)
-    disponivel_venda = models.BooleanField()
+    disponivel_venda = models.BooleanField(blank=True, null=True)
 
     class Meta:
         db_table = 'itens_colecao'
