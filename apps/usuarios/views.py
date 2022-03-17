@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.urls import reverse
+from dal import autocomplete
 from django.contrib import messages
 from django.views.generic import CreateView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
-from apps.usuarios.forms import UsuarioModelForm
+from apps.usuarios.forms import UsuarioModelForm, UsuarioFiltroIndexForm
 from django.contrib.messages.views import SuccessMessageMixin
 
 from apps.usuarios.models import CustomUsuario
@@ -33,6 +34,10 @@ class UsuarioHtmxListView(SuccessMessageMixin, ListView):
     #     usuarios = CustomUsuario.object.filter(
     #         id=self.request.session._session['_auth_user_id'])
     #     return usuarios.order_by('id')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = UsuarioFiltroIndexForm()
+        return context
 
 
 class UsuarioHtmxCreateView(SuccessMessageMixin, CreateView):
@@ -42,14 +47,14 @@ class UsuarioHtmxCreateView(SuccessMessageMixin, CreateView):
     sucess_message = 'Usuário cadastrado'
     success_url = 'form'
 
-    def get_queryset(self):
-        request = super().get_queryset()
+    # def get_queryset(self):
+    #     request = super().get_queryset()
 
-        return request
+    #     return request
 
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        return response
+    # def post(self, request, *args, **kwargs):
+    #     response = super().post(request, *args, **kwargs)
+    #     return response
 
 
 class UsuarioHtmxUpdateView(SuccessMessageMixin, UpdateView):
@@ -87,3 +92,17 @@ class UsuarioHtmxDeleteView(SuccessMessageMixin, DeleteView):
         response['HX-trigger'] = 'hx-list-updated'
 
         return response
+
+
+class RetornarUsuarios(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return CustomUsuario.objects.none()
+
+        qs = CustomUsuario.objects.all()
+
+        if self.q:
+            qs = qs.filter(first_name__istartswith=self.q)
+
+        return qs

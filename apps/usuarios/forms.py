@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from dal import autocomplete
 from django import forms
 
 from apps.usuarios.models import CustomUsuario, UFS_SIGLAS
@@ -66,3 +67,15 @@ class UsuarioModelForm(forms.ModelForm):
             'first_name', 'last_name', 'cpf', 'foto', 'data_nascimento', 'telefone', 'email',
             'redes_sociais', 'cep', 'logradouro', 'bairro', 'cidade', 'uf', 'numero'
         ]
+
+
+class UsuarioFiltroIndexForm(forms.Form):
+    busca = forms.ChoiceField(
+        widget=autocomplete.Select2(
+            url='usuario:retornar_usuarios',
+            attrs={
+                'data-placeholder': 'Todos os registros',
+                'data-minimum-input-length': 1,
+                'data-theme': 'bootstrap4',
+            })
+    )

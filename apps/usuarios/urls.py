@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (UsuarioHtmxListView, UsuarioHtmxCreateView,
                     UsuarioHtmxUpdateView, UsuarioHtmxDeleteView,
-                    UsuarioTemplateView)
+                    UsuarioTemplateView, RetornarUsuarios)
 
 app_name = 'usuario'
 
@@ -31,5 +31,9 @@ urlpatterns = [
         route='delete/<int:pk>/',
         view=UsuarioHtmxDeleteView.as_view(),
         name='delete'
-    )
+    ),
+    path(
+        route='retornar_usuarios/',
+        view=RetornarUsuarios.as_view(),
+        name='retornar_usuarios'),
 ]
