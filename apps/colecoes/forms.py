@@ -1,4 +1,4 @@
-from attr import attr
+# from attr import attr
 from django import forms
 
 from apps.colecoes.models import Colecao
