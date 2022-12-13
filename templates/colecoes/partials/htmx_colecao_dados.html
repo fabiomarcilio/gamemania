@@ -75,7 +75,7 @@
                             Salvar
                         </button>
                     </div>
-                    <div class="card-footer">
+                    {% comment %} <div class="card-footer">
                         {% if colecao_id %}
                             <a href="{% url 'colecao:form_itens' colecao_id %}">
                         {% endif %}
@@ -87,7 +87,7 @@
                                 Adicionar itens
                             </button> 
                         </a>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="card-footer">
                         <a href="{% url 'colecao:form' %}">
                             <button type="button" class="btn btn-info"

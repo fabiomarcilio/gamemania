@@ -30,6 +30,13 @@ class ItemHtmxCreateView(SuccessMessageMixin, CreateView):
     success_url = 'form'
 
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.usuario_id = user.id
+        form.instance.colecao_id = self.request.POST['colecao']
+        return super().form_valid(form)
+
+
 class ItemHtmxUpdateView(SuccessMessageMixin, UpdateView):
     model = Item
     form_class = ItemModelForm

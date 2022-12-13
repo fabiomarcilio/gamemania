@@ -70,7 +70,7 @@ class CustomUsuario(AbstractUser):
                                   db_index=True, error_messages={"unique": "Pessoa já cadastrado"})
     last_name = models.CharField(
         max_length=255, blank=False, null=False, db_index=True)
-    cpf = models.CharField(max_length=11, blank=True, null=True, error_messages={
+    cpf = models.CharField(max_length=14, blank=True, null=True, error_messages={
                            "unique": "CPF já cadastrado"})
     foto = models.ImageField(blank=True, null=True,
                              upload_to='pessoas')

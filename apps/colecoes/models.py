@@ -19,3 +19,7 @@ class Colecao(models.Model):
         db_table = 'colecoes'
         verbose_name = 'Coleção'
         verbose_name_plural = 'Coleções'
+
+    def __str__(self) -> str:
+        return self.nome
+

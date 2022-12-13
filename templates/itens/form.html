@@ -19,6 +19,11 @@
 <div class="col-md-12">
     <div class="container-fluid">
         <div id="container-item-dados"
+            {% if item_id %}
+                action="{% url 'item:update' item_id %}"
+            {% else %}
+                action="{% url 'item:create' %}"
+            {% endif %}
             hx-get="{% url 'item:create' %}"
             hx-vals='{"item_id": "{{ item.id }}"}'
             hx-trigger="load"
