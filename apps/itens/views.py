@@ -8,6 +8,7 @@ from django.contrib import messages
 
 from apps.itens.models import Item
 from apps.itens.forms import ItemModelForm
+from apps.colecoes.models import Colecao
 
 
 class ItemTemplateView(TemplateView):
@@ -21,6 +22,11 @@ class ItemHtmxListView(SuccessMessageMixin, ListView):
     paginate_by = 5
     ordering = '-id'
 
+    def get_context_data(self, **kwargs):
+        response = super().get_context_data(**kwargs)
+        response['itens'] = Item.objects.filter(usuario=self.request.user.id)
+        return response
+
 
 class ItemHtmxCreateView(SuccessMessageMixin, CreateView):
     model = Item
@@ -28,6 +34,15 @@ class ItemHtmxCreateView(SuccessMessageMixin, CreateView):
     form_class = ItemModelForm
     sucess_message = 'Item cadastrado!'
     success_url = 'form'
+
+    def get_initial(self):
+        return {'usuario':self.request.user}
+
+    def get_context_data(self, **kwargs):
+        response = super().get_context_data(**kwargs)
+        # usuario = self.request.user
+        # response['form'].initial['colecao'] = Colecao.objects.filter(usuario=usuario.id)
+        return response
 
 
     def form_valid(self, form):
@@ -43,6 +58,9 @@ class ItemHtmxUpdateView(SuccessMessageMixin, UpdateView):
     template_name = 'itens/partials/htmx_item_dados.html'
     success_message = 'Item alterado!'
 
+    def get_initial(self):
+        return {'usuario':self.request.user}
+
     def get_success_url(self):
         return reverse('item:form')
 
@@ -52,6 +70,7 @@ class ItemHtmxUpdateView(SuccessMessageMixin, UpdateView):
         context['item_id'] = item_id
         item = Item.objects.get(id=item_id)
         form_item = ItemModelForm(initial=item.__dict__)
+        # form_item.initial['colecao'] = Colecao.objects.get(id=item.colecao_id)
         context['item'] = item
         context['form'] = form_item
         return context

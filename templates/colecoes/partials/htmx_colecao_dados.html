@@ -75,19 +75,6 @@
                             Salvar
                         </button>
                     </div>
-                    {% comment %} <div class="card-footer">
-                        {% if colecao_id %}
-                            <a href="{% url 'colecao:form_itens' colecao_id %}">
-                        {% endif %}
-                            <button type="button" class="btn btn-warning"
-                                {% if not colecao_id %}
-                                    disabled
-                                {% endif %}>
-                                <i class="fas fa-solid fa-plus mr-1"></i>
-                                Adicionar itens
-                            </button> 
-                        </a>
-                    </div> {% endcomment %}
                     <div class="card-footer">
                         <a href="{% url 'colecao:form' %}">
                             <button type="button" class="btn btn-info"

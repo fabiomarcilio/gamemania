@@ -43,38 +43,11 @@ INSTALLED_APPS = [
     'apps.colecoes',
     'apps.itens',
     'apps.usuarios',
-    # 'apps.pessoas',
+    'apps.anuncios',
 ]
 
-# SHARED_APPS = [
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     # 'apps.colecoes',
-#     # 'apps.itens',
-#     # 'apps.usuarios',
-#     # 'apps.pessoas',
-# ]
-
-# TENANT_APPS = [
-#     'tenant_schemas',
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'apps.colecoes',
-#     'apps.itens',
-#     'apps.usuarios',
-#     'apps.pessoas',
-# ]
 
 MIDDLEWARE = [
-    # 'tenant_schemas.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -98,9 +71,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            # 'libraries': {
-            #     'custom_filters': 'gamemania.template_filters.custom_filters',
-            # },
         },
     },
 ]

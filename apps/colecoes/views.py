@@ -1,4 +1,3 @@
-# from urllib import response
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
@@ -12,20 +11,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from apps.colecoes.forms import ColecaoModelForm
 
 from .models import Colecao
-# from apps.itens.models import ItemColecao
 
 
 class ColecaoTemplateView(SuccessMessageMixin, TemplateView):
     template_name = 'colecoes/form.html'
-
-
-# class ItensColecaoTemplateView(SuccessMessageMixin, TemplateView):
-#     template_name = 'colecoes/form_itens.html'
-
-    # def get_context_data(self, **kwargs):
-    #     response = super().get_context_data(**kwargs)
-    #     response['colecao_id'] = kwargs['pk']
-    #     return response
 
 
 class ColecaoHtmxListView(SuccessMessageMixin, ListView):
@@ -91,47 +80,3 @@ class ColecaoHtmxDeleteView(SuccessMessageMixin, DeleteView):
         response['HX-trigger'] = 'hx-list-updated'
         return response
 
-
-# class ColecaoHtmxAddItensListView(ListView):
-#     model = ItemColecao
-#     template_name = 'colecoes/partials/htmx_colecao_itens_list.html'
-#     context_object_name = 'itens'
-#     paginate_by = 5
-#     ordering = '-id'
-
-#     def get_context_data(self, **kwargs):
-#         response = super().get_context_data(**kwargs)
-#         # usuario = self.request.user
-#         colecao_id = self.request.GET.get('colecao_id')
-#         itens_colecao = ItemColecao.objects.filter(
-#             colecao=colecao_id)
-#         colecao = Colecao.objects.get(id=colecao_id)
-#         response['form'] = ItemColecaoModelForm()
-#         response['itens_colecao'] = itens_colecao
-#         response['colecao'] = colecao
-
-#         return response
-
-
-# class ColecaoHtmxAddItensCreateView(SuccessMessageMixin, CreateView):
-#     model = ItemColecao
-#     template_name = 'colecoes/partials/htmx_colecao_itens_dados.html'
-#     form_class = ItemColecaoModelForm
-#     sucess_message = 'Item adicionado!'
-#     success_url = 'form_itens'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         colecao_id = self.request.GET.get('colecao_id')
-#         context['colecao'] = Colecao.objects.get(
-#             id=colecao_id)
-#         context['colecao_id'] = colecao_id
-#         return context
-
-    # def form_valid(self, form):
-    #     user = self.request.user
-    #     form.instance.usuario_id = user.id
-    #     form.instance.id = user.id
-    #     colecao_id = self.request.POST.get('colecao_id')
-    #     form.instance.colecao_id = colecao_id
-    #     return super().form_valid(form)

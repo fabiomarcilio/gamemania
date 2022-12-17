@@ -31,19 +31,4 @@ urlpatterns = [
         view=ColecaoHtmxDeleteView.as_view(),
         name='delete'
     ),
-    # path(
-    #     route='form_itens/<int:pk>/',
-    #     view=ItensColecaoTemplateView.as_view(),
-    #     name='form_itens'
-    # ),
-    # path(
-    #     route='adicionar_itens_list',
-    #     view=ColecaoHtmxAddItensListView.as_view(),
-    #     name='adicionar_itens_list'
-    # ),
-    # path(
-    #     route='adicionar_itens_create',
-    #     view=ColecaoHtmxAddItensCreateView.as_view(),
-    #     name='adicionar_itens_create'
-    # ),
 ]

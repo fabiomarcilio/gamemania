@@ -30,10 +30,6 @@ class UsuarioHtmxListView(SuccessMessageMixin, ListView):
     paginate_by = 5
     ordering = '-id'
 
-    # def get_queryset(self):
-    #     usuarios = CustomUsuario.object.filter(
-    #         id=self.request.session._session['_auth_user_id'])
-    #     return usuarios.order_by('id')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = UsuarioFiltroIndexForm()
@@ -46,15 +42,6 @@ class UsuarioHtmxCreateView(SuccessMessageMixin, CreateView):
     form_class = UsuarioModelForm
     sucess_message = 'Usuário cadastrado'
     success_url = 'form'
-
-    # def get_queryset(self):
-    #     request = super().get_queryset()
-
-    #     return request
-
-    # def post(self, request, *args, **kwargs):
-    #     response = super().post(request, *args, **kwargs)
-    #     return response
 
 
 class UsuarioHtmxUpdateView(SuccessMessageMixin, UpdateView):

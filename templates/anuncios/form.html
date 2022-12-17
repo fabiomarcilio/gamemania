@@ -10,7 +10,7 @@
         </a>
     </li>
     <li class="breadcrumb-item active">
-        Itens
+        Anúncios
     </li>
 </ol>
 {% endblock breadcrumb %}
@@ -18,21 +18,16 @@
 {% block body %}
 <div class="col-md-12">
     <div class="container-fluid">
-        <div id="container-item-dados"
-            {% if item_id %}
-                action="{% url 'item:update' item_id %}"
-            {% else %}
-                action="{% url 'item:create' %}"
-            {% endif %}
-            hx-get="{% url 'item:create' %}"
-            hx-vals='{"item_id": "{{ item.id }}"}'
-            hx-trigger="load, hx-dados-updated"
+        {% comment %} <div id="container-anuncio-dados"
+            hx-get="{% url 'anuncio:create' %}"
+            hx-vals='{"anuncio_id": "{{ anuncio.id }}"}'
+            hx-trigger="load"
             hx-encoding="multipart/form-data"
             hx-swap="innerHTML">
-        </div>
-        <div id="container-item-list"
-            hx-get="{% url 'item:list' %}"
-            hx-vals='{"item_id": "{{ item.id }}"}'
+        </div> {% endcomment %}
+        <div id="container-anuncio-list"
+            hx-get="{% url 'anuncio:list' %}"
+            hx-vals='{"anuncio_id": "{{ anuncio.id }}"}'
             hx-trigger="load, hx-list-updated from:body"
             hx-encoding="multipart/form-data"
             hx-swap="innerHTML">

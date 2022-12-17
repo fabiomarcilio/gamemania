@@ -6,7 +6,7 @@
     <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
-                <h3 class="card-title">Itens Cadastrados</h3>
+                <h3 class="card-title">Anúncios Cadastrados</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -26,54 +26,53 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    {% comment %} <th>Foto</th> {% endcomment %}
+                                    <th>Foto</th>
                                     <th>Nome</th>
                                     <th>Marca</th>
                                     <th>Modelo</th>
-                                    <th>Cor</th>
-                                    <th>Descrição</th>
-                                    <th>Dt compra</th>
-                                    <th>Valor pago</th>
-                                    <th>Valor venda</th>
                                     <th>Estado</th>
-                                    <th>Coleção</th>
-                                    <th>Disp. p/ venda</th>
+                                    <th>Valor de venda</th>
+                                    <th>Proprietário</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in itens %}
+                                {% for anuncio in anuncios %}
                                     <tr>
-                                        <td>{{ item.id }}</td>
-                                        <td>{{ item.nome_item }}</td>
-                                        <td>{{ item.marca }}</td>
-                                        <td>{{ item.modelo }}</td>
-                                        <td>{{ item.cor }}</td>
-                                        <td>{{ item.descricao }}</td>
-                                        <td>{{ item.data_compra }}</td>
-                                        <td>{{ item.valor_pago }}</td>
-                                        <td>{{ item.valor_venda }}</td>
-                                        <td>{{ item.estado_item }}</td>
-                                        <td>{{ item.colecao }}</td>
-                                        <td>{{ item.disponivel_venda }}</td>
+                                        <td>{{ anuncio.id }}</td>
                                         <td>
-                                            <a hx-trigger="click"
+                                            {% if anuncio.foto.url %}
+                                                <img src='{{ anuncio.foto.url }}' width='70px' height='70px' href="#"/>
+                                            {% else %}
+                                                "<img src='{% static 'dist/img/sem-foto.gif' %}' width='300' height='200'/>"
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ anuncio.nome_item }}</td>
+                                        <td>{{ anuncio.marca }}</td>
+                                        <td>{{ anuncio.modelo }}</td>
+                                        <td>{{ anuncio.estado_item }}</td>
+                                        <td>{{ anuncio.valor_venda }}</td>
+                                        <td>{{ anuncio.usuario }}</td>
+                                        <td>
+                                            {% comment %} <a hx-trigger="click"
                                                 href="#"
-                                                hx-get="{% url 'item:update' item.id %}"
-                                                hx-target="#container-item-dados"
+                                                hx-get="{% url 'anuncio:update' anuncio.id %}"
+                                                hx-target="#container-anuncio-dados"
                                                 hx-swap="innerHTML">
                                                 Editar | 
                                             </a>
                                             <a hx-trigger="confirmado"
                                                 href="#"
-                                                hx-delete="{% url 'item:delete' item.id %}"
-                                                hx-target="#container-item-list"
+                                                hx-delete="{% url 'anuncio:delete' anuncio.id %}"
+                                                hx-target="#container-anuncio-list"
                                                 hx-swap="innerHTML"
                                                 _="on click
                                                 call showDeleteConfirmationWindow(event)
                                                 if 
                                                 result.value trigger confirmado">
                                                 Excluir
-                                            </a>
+                                            </a> {% endcomment %}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -83,7 +82,7 @@
                 </div>
             </div>
         </div>
-        {% include 'itens/pagination.html' %}
+        {% include 'anuncios/pagination.html' %}
     </div>
 </div>
 {% endblock content %}
